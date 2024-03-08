@@ -1,0 +1,16 @@
+flutter_native_splash:
+  color: "#E0E0E0"
+  image: "assets/logos/food_logo.png"
+
+  android_12:
+    color: "#E0E0E0"
+    image: "assets/logos/food_logo.png"
+
+
+  web: false
+
+  # run the following command in the terminal:
+  # dart run flutter_native_splash:create
+
+  # To restore Flutter's default white splash screen, run the following command in the terminal:
+  # dart run flutter_native_splash:remove
