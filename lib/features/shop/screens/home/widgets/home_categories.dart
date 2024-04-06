@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/image_text_widget/vertical_image_text.dart';
+import 'package:tasty_dinery/features/shop/controllers/category_contoller.dart';
 import 'package:tasty_dinery/features/shop/screens/sub_category/subcategories.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
-import 'package:tasty_dinery/utils/constants/text_strings.dart';
-import 'package:tasty_dinery/utils/helpers/helper_functions.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/category_shimmer.dart';
 
 class CcHomeCategories extends StatelessWidget {
   const CcHomeCategories({
@@ -14,27 +13,48 @@ class CcHomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = CcHelperFunctions.isDarkMode(context);
+    // controller
+    final categoryController = Get.put(CategoryController());
 
-    return Expanded(
-      child: Container(
-        height: 80,
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        child: ListView.builder(
-          itemCount: 7,
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemBuilder: (_, index) {
-            return CcVerticalImageText(
-              image: CcImages.teaIcon,
-              title: CcTexts.tea,
-              backgroundColor:
-                  dark ? CcColors.dark.withOpacity(0.9) : CcColors.light,
-              onTap: () => Get.to(() => const SubCategoriesScreen()),
-            );
-          },
-        ),
-      ),
+    // container
+    return Obx(
+      () {
+        if (categoryController.isLoading.value) {
+          return const CcCategoryShimmer();
+        }
+
+        if (categoryController.featuredCategories.isEmpty) {
+          return Center(
+              child: Text('No Data Found!',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: Colors.white)));
+        }
+
+        return Expanded(
+          child: Container(
+            height: 80,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: ListView.builder(
+              itemCount: categoryController.featuredCategories.length,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemBuilder: (_, index) {
+                final category = categoryController.featuredCategories[index];
+
+                return CcVerticalImageText(
+                  image: category.image,
+                  title: category.name,
+                  onTap: () =>
+                      Get.to(() => SubCategoriesScreen(category: category)),
+                  backgroundColor: CcColors.light,
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

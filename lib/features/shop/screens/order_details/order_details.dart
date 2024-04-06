@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:tasty_dinery/features/shop/screens/order_details/widgets/order_details_per_row.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_order_controller.dart';
+import 'package:tasty_dinery/features/shop/models/cart_item_model.dart';
+import 'package:tasty_dinery/features/shop/models/order_model.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
+  const OrderDetailsScreen({
+    super.key,
+    required this.order,
+  });
+
+  final OrderModel order;
 
   @override
   Widget build(BuildContext context) {
+    // controller
+    // ignore: unused_local_variable
+    final orderController = Get.put(OrderController());
+    // ignore: unused_local_variable
+    final cartController = Get.put(CartController());
+
+    // scaffold
     return Scaffold(
       appBar: CcAppBar(
         showBackArrow: true,
@@ -31,7 +46,7 @@ class OrderDetailsScreen extends StatelessWidget {
               color: Colors.transparent,
               height: 250,
               child: QrImageView(
-                data: "[#35g34]",
+                data: order.id,
               ),
             ),
 
@@ -44,103 +59,112 @@ class OrderDetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               padding: const EdgeInsets.only(
                   top: 10, bottom: 10, right: 20, left: 20),
-              child: Column(
-                children: [
-                  // date for both created at and served at
 
+              // outer column
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // only one
+                  // inside row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      // first
+                      // column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Text("04/03/24, 08:56",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(fontSize: 13)),
-                                ],
-                              ),
-                              Text("Ordering Time",
-                                  style: Theme.of(context).textTheme.bodySmall),
-                            ],
+                          // 01
+                          // ordering time
+                          Text(
+                            order.formattedOrderDate,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 13),
+                          ),
+                          Text(
+                            "Ordering Time",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+
+                          const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+                          // 02
+                          // order id
+                          Text(
+                            order.id,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 13),
+                          ),
+                          Text(
+                            "Order ID",
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
-                      Row(
+
+                      // second
+                      // column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Text("04/03/24, 08:56",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .copyWith(fontSize: 13)),
-                                ],
-                              ),
-                              Text("Serving Time",
-                                  style: Theme.of(context).textTheme.bodySmall),
-                            ],
+                          // 01
+                          // served time
+                          Text(
+                            order.formattedServedDate,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 13),
                           ),
-                          const SizedBox(width: 10),
+
+                          Text("Served Time",
+                              style: Theme.of(context).textTheme.bodySmall),
+
+                          const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+                          // 02
+                          // control number
+                          Text(
+                            '2024670890',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(fontSize: 13),
+                          ),
+
+                          Text("Control Number  ",
+                              style: Theme.of(context).textTheme.bodySmall),
                         ],
-                      )
+                      ),
                     ],
-                  ),
-
-                  const SizedBox(height: CcSizes.spaceBtnItems_1),
-
-                  // order ID and control number
-                  const CcOrderDetailPerRow(
-                    // order id
-                    icon1: Iconsax.tag,
-                    title1: "[#35g34]",
-                    subtitle1: "Order ID",
-
-                    // control number
-                    icon2: Icons.inventory_rounded,
-                    title2: "2024670890",
-                    subtitle2: "Control Number",
                   ),
 
                   const SizedBox(height: CcSizes.spaceBtnSections),
 
                   // items and quantity and individual price
                   // pass grid for better efficiency in coding
-                  const Column(
-                    children: [
-                      CcMealItems(
-                        productString: "Vegetable Rice with Chicken Stew",
-                        quantity: "1",
-                        price: "10,000",
-                      ),
-                      CcMealItems(
-                        productString: "Vegetable Rice with Chicken Stew",
-                        quantity: "1",
-                        price: "10,000",
-                      ),
-                      CcMealItems(
-                        productString: "Vegetable Rice with Chicken Stew",
-                        quantity: "1",
-                        price: "10,000",
-                      ),
-                    ],
+
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: order.items.length,
+                    separatorBuilder: (_, index) => const SizedBox(height: 5),
+                    itemBuilder: (_, index) {
+                      final itemBought = order.items[index];
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CcBoughtProductItems(itemBought: itemBought),
+                        ],
+                      );
+                    },
                   ),
-                  Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      Text("Products Ordered",
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ],
-                  ),
+                  Text("Products Ordered",
+                      style: Theme.of(context).textTheme.bodySmall),
 
                   // total price and price with vat included
                   const SizedBox(height: CcSizes.spaceBtnSections),
@@ -148,51 +172,107 @@ class OrderDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      // first
+                      // column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(width: 10),
-                          Column(
+                          // 01
+                          // total price without vat
+                          Text(
+                            '${order.totalAmount}/=',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Text(
+                            "Total Price",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+
+                          const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+                          // 02
+                          // payment method
+                          Row(
                             children: [
-                              Text("30,000/=",
+                              CcRoundedContainer(
+                                  width: 35,
+                                  height: 35,
+                                  backgroundColor: Colors.transparent,
+                                  padding: const EdgeInsets.all(CcSizes.sm),
+                                  child: Image(
+                                      image: AssetImage(
+                                        order.paymentMethod == 'Airtel Money'
+                                            ? CcImages.airtel
+                                            : order.paymentMethod == 'Tigo Pesa'
+                                                ? CcImages.tigo
+                                                : order.paymentMethod ==
+                                                        'Halo Pesa'
+                                                    ? CcImages.halotel
+                                                    : order.paymentMethod ==
+                                                            'M-Pesa'
+                                                        ? CcImages.vodacom
+                                                        : CcImages.ttcl,
+                                      ),
+                                      fit: BoxFit.contain)),
+                              Text(order.paymentMethod,
                                   style: Theme.of(context).textTheme.bodyLarge),
-                              Text("Total Price",
-                                  style: Theme.of(context).textTheme.bodySmall),
                             ],
                           ),
+                          Text('Payment Method',
+                              style: Theme.of(context).textTheme.bodySmall)
                         ],
                       ),
-                      Row(
+
+                      // second
+                      // column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          // 01
+                          // total price with vat
+                          Text(
+                            '${order.totalAmount}/=',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Text(
+                            "Including VAT",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+
+                          const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+                          const SizedBox(height: 5),
+
+                          // 02
+                          // payment number
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text("31,000/=",
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                              Text("Including VAT",
-                                  style: Theme.of(context).textTheme.bodySmall),
+                              Text(
+                                order.paymentNumber,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(fontSize: 13),
+                              )
                             ],
                           ),
-                          const SizedBox(width: 30),
+
+                          const SizedBox(height: 5),
+
+                          Row(
+                            children: [
+                              Text('Payment Number',
+                                  style: Theme.of(context).textTheme.bodySmall),
+                            ],
+                          )
                         ],
-                      )
+                      ),
                     ],
                   ),
 
-                  const SizedBox(height: CcSizes.spaceBtnSections),
-
-                  // payment method and total price
-                  const CcOrderDetailPerRow(
-                    // payment method
-                    isChildOneImage: true,
-                    imageString1: CcImages.airtel,
-                    title1: "Airtel Money",
-                    subtitle1: "Payment Method",
-
-                    // phone number
-                    icon2: Icons.phone,
-                    title2: "0788****976",
-                    subtitle2: "Phone Number",
-                  ),
+                  const SizedBox(height: CcSizes.spaceBtnItems_1),
                 ],
               ),
             ),
@@ -203,52 +283,36 @@ class OrderDetailsScreen extends StatelessWidget {
   }
 }
 
-class CcMealItems extends StatelessWidget {
-  const CcMealItems({
+class CcBoughtProductItems extends StatelessWidget {
+  const CcBoughtProductItems({
     super.key,
-    required this.productString,
-    required this.quantity,
-    required this.price,
+    required this.itemBought,
   });
-  final String productString, quantity, price;
+
+  final CartItemModel itemBought;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CcRoundedContainer(
-          width: 40,
-          height: 40,
-          backgroundColor: Colors.transparent,
-          padding: const EdgeInsets.all(CcSizes.sm),
-          child: Icon(
-            Icons.circle,
-            color: Colors.blue.shade700,
+    // ignore: unused_local_variable
+    final cartController = CartController.instance;
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0, bottom: 3),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '${itemBought.title} x ${itemBought.quantity}',
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(productString,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 11)),
-            const SizedBox(width: 5),
-            Text("x$quantity",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 11)),
-            const SizedBox(width: 15),
-            Text("$price/=",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 12, fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ],
+          Text(
+            '${itemBought.price * itemBought.quantity}',
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }

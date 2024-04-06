@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-15:/values-en-rCA/values-en-rCA.xml",
+            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-25:/values-en-rCA/values-en-rCA.xml",
             "map": [
                 {
                     "source": "/home/techsphere/.gradle/caches/transforms-3/d9d38ec9344928c1b01c151ec647a95a/transformed/browser-1.5.0/res/values-en-rCA/values-en-rCA.xml",

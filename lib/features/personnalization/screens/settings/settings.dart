@@ -5,6 +5,7 @@ import 'package:tasty_dinery/common/widgets/custom_shapes/containers/secondary_h
 import 'package:tasty_dinery/common/widgets/list_tile/settings_menu_tiles.dart';
 import 'package:tasty_dinery/common/widgets/list_tile/user_profile_tile.dart';
 import 'package:tasty_dinery/common/widgets/texts/section_heading.dart';
+import 'package:tasty_dinery/features/personnalization/controllers/logout_controller.dart';
 import 'package:tasty_dinery/features/personnalization/screens/profile/profile_screen.dart';
 import 'package:tasty_dinery/features/shop/screens/cart/cart.dart';
 import 'package:tasty_dinery/features/shop/screens/order/order.dart';
@@ -18,6 +19,10 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // instantiate controller
+    final controller = Get.put(LogoutController());
+
+    // scaffold
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -60,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
 
                   CcSettingsMenuTile(
                     icon: Icons.favorite,
-                    title: 'Favorites',
+                    title: 'Wishlist',
                     onTap: () => Get.to(() => const FavoriteScreen()),
                   ),
                   CcSettingsMenuTile(
@@ -110,13 +115,13 @@ class SettingsScreen extends StatelessWidget {
 
                   const Divider(),
 
-                  const SizedBox(height: CcSizes.spaceBtnSections),
+                  const SizedBox(height: CcSizes.spaceBtnItems_1),
 
                   SizedBox(
                     width: double.infinity,
                     height: 60,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => controller.logout(),
                       child: Text(
                         "Logout",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(

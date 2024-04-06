@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-15:/values-v31/values-v31.xml",
+            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-25:/values-v31/values-v31.xml",
             "map": [
                 {
                     "source": "/home/techsphere/Documents/fourth year/fyp/project/tasty_dinery/android/app/src/main/res/values-v31/styles.xml",

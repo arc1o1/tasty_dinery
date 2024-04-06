@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:tasty_dinery/features/shop/screens/search/search_meal.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
-// import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcHomeAppBar extends StatelessWidget {
   const CcHomeAppBar({
@@ -13,6 +11,9 @@ class CcHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // controller instantiation
+
+    // appbar
     return CcAppBar(
       padding: const EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
       // title
@@ -27,9 +28,8 @@ class CcHomeAppBar extends StatelessWidget {
 
       // leading image
       showProfile: true,
-      imageString: CcImages.user2,
-      imageHeight: 20,
-      imageWidth: 20,
+      imageHeight: 50,
+      imageWidth: 50,
       imageBackgroundColor: Colors.blue.shade600,
 
       // cart icon

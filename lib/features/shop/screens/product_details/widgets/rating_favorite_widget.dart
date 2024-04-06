@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tasty_dinery/common/widgets/favorite_icon/favorite_icon.dart';
 import 'package:tasty_dinery/common/widgets/products/ratings/ratings_indicator.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcRatingAndFavorite extends StatelessWidget {
   const CcRatingAndFavorite({
     super.key,
+    required this.productId,
   });
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +32,29 @@ class CcRatingAndFavorite extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
         // favorite icon
-        Container(
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(CcSizes.cardRadiusSm),
-              topRight: Radius.circular(CcSizes.cardRadiusSm),
-              bottomRight: Radius.circular(CcSizes.cardRadiusSm),
-              bottomLeft: Radius.circular(CcSizes.cardRadiusSm),
-            ),
-          ),
-          child: const SizedBox(
-            width: CcSizes.iconXl,
-            height: CcSizes.iconXl,
-            child: Center(
-              child: Icon(Icons.favorite_rounded, color: Colors.red),
-            ),
-          ),
-        ),
+        CcFavoriteIcon(productId: productId),
+        // Container(
+        //   decoration: const BoxDecoration(
+        //     color: Colors.transparent,
+        //     borderRadius: BorderRadius.only(
+        //       topLeft: Radius.circular(CcSizes.cardRadiusSm),
+        //       topRight: Radius.circular(CcSizes.cardRadiusSm),
+        //       bottomRight: Radius.circular(CcSizes.cardRadiusSm),
+        //       bottomLeft: Radius.circular(CcSizes.cardRadiusSm),
+        //     ),
+        //   ),
+        //   child: const SizedBox(
+        //     width: CcSizes.iconXl,
+        //     height: CcSizes.iconXl,
+        //     child: Center(
+        //       child: Icon(Icons.favorite_rounded, color: Colors.red),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

@@ -64,7 +64,7 @@ class CcImages {
   static const String productImage003 =
       "assets/images/products/3_vegetable_rice_with_chicken_stew_3.jpeg";
   static const String productImage0003 =
-      "assets/images/products/3_vegetable_rice_with_chicken_stew_1.resized.jpeg";
+      "assets/images/products/3_vegetable_rice_with_chicken_stew_3.jpeg";
   static const String productImage4 =
       "assets/images/products/4_githeri_or_kande_1.jpeg";
   static const String productImage04 =
@@ -103,6 +103,7 @@ class CcImages {
   // success screen
   static const String successScreen =
       "assets/images/success_screen/sammy-line-online-payment.png";
+  static const String tick = "assets/images/success_screen/tick.png";
 
   // lottie animations
   static const String circularAnimation =
@@ -110,6 +111,8 @@ class CcImages {
   static const String clockLoadingAnimation =
       "assets/lottie_animations/clock-loading.json";
   static const String success = "assets/lottie_animations/success.json";
+  static const String pencilLoading =
+      "assets/lottie_animations/pencil_animation.json";
 
   static const String loading =
       "assets/lottie_animations/Spinner-1.3s-200px.gif";

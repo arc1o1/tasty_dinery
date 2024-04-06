@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
-import 'package:tasty_dinery/common/widgets/images/circular_profile_image.dart';
+import 'package:tasty_dinery/common/widgets/images/circular_image.dart';
 import 'package:tasty_dinery/common/widgets/texts/section_heading.dart';
+import 'package:tasty_dinery/features/personnalization/controllers/user_controller.dart';
+import 'package:tasty_dinery/features/personnalization/screens/profile/widgets/change_name.dart';
+import 'package:tasty_dinery/features/personnalization/screens/profile/widgets/change_phone_number.dart';
 import 'package:tasty_dinery/features/personnalization/screens/profile/widgets/profile_menu.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/shimmer_effects.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // controller
+    final controller = UserController.instance;
+
+    // scaffold
     return Scaffold(
       // body
       appBar: const CcAppBar(
@@ -25,17 +34,29 @@ class ProfileScreen extends StatelessWidget {
             children: [
               // profile picture
               SizedBox(
-                width: double.infinity,
+                width: 200,
                 child: Column(
                   children: [
-                    CcCircularProfileImage(
-                        backgroundColor: Colors.grey.withOpacity(0.2),
-                        image: CcImages.user2,
-                        width: 150,
-                        height: 150,
-                        padding: 20),
+                    Obx(
+                      () {
+                        final networkImage =
+                            controller.user.value.profilePicture;
+                        final image = networkImage.isNotEmpty
+                            ? networkImage
+                            : CcImages.user2;
+                        return controller.imageUploading.value
+                            ? const CcShimmerEffect(
+                                width: 100, height: 100, radius: 100)
+                            : CcCircularImage(
+                                backgroundColor: Colors.blue.shade600,
+                                image: image,
+                                width: 100,
+                                height: 100,
+                                isNetworkImage: networkImage.isNotEmpty);
+                      },
+                    ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.uploadUserProfilePicture(),
                         child: const Text("Change Profile Picture"))
                   ],
                 ),
@@ -53,9 +74,14 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: CcSizes.spaceBtnItems_2),
 
               // user details
-              CcProfileMenu(onPressed: () {}, title: "Name:", value: "Mwesiga"),
               CcProfileMenu(
-                  onPressed: () {}, title: "Username:", value: "Mwesiga"),
+                  onPressed: () => Get.to(() => const ChangeName()),
+                  title: "Name:",
+                  value: controller.user.value.fullName),
+              CcProfileMenu(
+                  onPressed: () {},
+                  title: "Username:",
+                  value: controller.user.value.firstName),
 
               const SizedBox(height: CcSizes.spaceBtnItems_2),
               const Divider(),
@@ -71,16 +97,32 @@ class ProfileScreen extends StatelessWidget {
               CcProfileMenu(
                   onPressed: () {},
                   title: "User ID:",
-                  value: "14146",
+                  value: controller.user.value.id,
                   icon: Icons.copy),
               CcProfileMenu(
                   onPressed: () {},
                   title: "E-mail:",
-                  value: "tegs123@gmail.com.com"),
+                  value: controller.user.value.email),
               CcProfileMenu(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const ChangePhoneNumber()),
                   title: "Phone Number:",
-                  value: "0621210210"),
+                  value: controller.user.value.phoneNumber),
+
+              const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+              const Divider(color: Colors.grey),
+
+              const SizedBox(height: CcSizes.spaceBtnItems_1),
+
+              Center(
+                child: TextButton(
+                  onPressed: () => controller.deleteAccountWarningPopup(),
+                  child: const Text(
+                    'Close Account',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

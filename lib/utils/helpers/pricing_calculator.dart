@@ -20,7 +20,7 @@ class CcPricingCalculator {
 
   static double getTaxRateForLocation(String location) {
     // tax rate for tanzania is 15%
-    return 0.15;
+    return 0.01;
   }
 
   // static double calculateCartTotal(CartModel cart) {

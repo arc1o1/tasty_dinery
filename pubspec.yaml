@@ -16,15 +16,17 @@ dependencies:
   # utility packages
 
   smooth_page_indicator: ^1.1.0
-  http: ^1.2.0
+  http: ^0.13.5
   url_launcher: ^6.2.5
   connectivity_plus: ^5.0.2
-  intl: ^0.19.0
+  intl: ^0.18.0
   logger: ^2.1.0
-  lottie: ^3.1.0
+  lottie: ^3.0.0
   circular_profile_avatar: ^2.0.5
   awesome_bottom_bar: ^1.2.4
   flutter_native_splash: ^2.3.10
+  shimmer: ^3.0.0
+  image_picker: ^1.0.4
 
   # icons
 
@@ -51,10 +53,14 @@ dependencies:
 
   # firebase 
   firebase_core: ^2.27.0
-  cloud_firestore: ^4.15.8
+  cloud_firestore: ^4.14.0
   firebase_auth: ^4.17.8
   google_sign_in: ^6.2.1
   sign_in_with_apple: ^5.0.0
+  firebase_storage: ^11.5.4
+  cached_network_image: ^3.3.1
+  azampay: ^0.0.1
+  pay: ^2.0.0
   
 
 

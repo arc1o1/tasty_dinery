@@ -17,7 +17,7 @@ class CcLoaders {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: CcColors.grey.withOpacity(0.9),
+            color: Colors.blue,
           ),
           child: Center(
             child: Text(

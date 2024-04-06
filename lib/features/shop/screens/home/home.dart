@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/primary_header_container.dart';
-// import 'package:tasty_dinery/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:tasty_dinery/common/widgets/layout/grid_layout.dart';
 import 'package:tasty_dinery/common/widgets/products/product_cards/product_cards_vertical.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/horizontal_shimmer.dart';
 import 'package:tasty_dinery/common/widgets/texts/section_heading.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_controller.dart';
 import 'package:tasty_dinery/features/shop/screens/all_products/all_products.dart';
 import 'package:tasty_dinery/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:tasty_dinery/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:tasty_dinery/features/shop/screens/home/widgets/promo_slider.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
+// import 'package:tasty_dinery/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,6 +17,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // controller
+    final controller = Get.put(ProductController());
+
+    // scaffold
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -31,12 +35,7 @@ class HomeScreen extends StatelessWidget {
 
                   SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
 
-                  // search bar
-                  // CcSearchContainer(text: 'what do you want to eat'),
-
-                  // SizedBox(height: CcSizes.spaceBtnItems_2),
-
-                  // section heading for popular categories
+                  // popular categories
                   Padding(
                     padding: EdgeInsets.only(left: CcSizes.defaultSpace),
                     child: Column(
@@ -65,33 +64,46 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // promo slider
-                  const CcPromoSlider(
-                    banners: [
-                      CcImages.promoBanner3,
-                      CcImages.promoBanner3,
-                      CcImages.promoBanner3,
-                    ],
-                  ),
+                  // const CcPromoSlider(),
 
-                  const SizedBox(height: CcSizes.spaceBtnItems_2),
+                  // const SizedBox(height: CcSizes.spaceBtnItems_2),
 
                   // heading
                   CcSectionHeading(
                     title: "Popular Products",
-                    onPressed: () => Get.to(() => const AllProducts()),
+                    onPressed: () => Get.to(() => AllProducts(
+                          title: 'Popular Products',
+                          // query: FirebaseFirestore.instance.collection('Products').where('IsFeatured', isEqualTo: true).limit(6),
+                          futureMethod: controller.fetchAllFeaturedProducts(),
+                        )),
                   ),
 
                   // grid layout for popular products in vertical direction
-                  Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: Column(
-                      children: [
-                        CcGridLayout(
-                            itemCount: 6,
-                            itemBuilder: (_, index) =>
-                                const CcProductCardVertical()),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Obx(
+                        () {
+                          if (controller.isLoading.value) {
+                            return const CcHorizontalProductShimmer();
+                          }
+
+                          if (controller.featuredProducts.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'No data Found',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            );
+                          }
+                          return CcGridLayout(
+                            itemCount: controller.featuredProducts.length,
+                            itemBuilder: (_, index) => CcProductCardVertical(
+                              product: controller.featuredProducts[index],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: CcSizes.spaceBtnItems_2),

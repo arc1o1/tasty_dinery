@@ -35,7 +35,7 @@ class CcOrderIndividualDetail extends StatelessWidget {
               padding: const EdgeInsets.all(CcSizes.sm),
               child: isChildImage!
                   ? Image(image: AssetImage(imageString!), fit: BoxFit.contain)
-                  : Icon(icon!, color: Colors.blue.shade700),
+                  : Icon(icon, color: Colors.blue.shade700),
             ),
             Text(title, style: Theme.of(context).textTheme.bodyLarge),
           ],

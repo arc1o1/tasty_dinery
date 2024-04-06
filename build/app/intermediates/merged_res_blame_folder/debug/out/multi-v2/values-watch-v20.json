@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-15:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-25:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/home/techsphere/.gradle/caches/transforms-3/4404bb8721373756f4fc8fd34059d6c0/transformed/jetified-play-services-auth-20.7.0/res/values-watch-v20/values.xml",
