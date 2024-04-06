@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:tasty_dinery/common/styles/spacing_styles.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 import 'package:tasty_dinery/utils/constants/text_strings.dart';
-import 'package:tasty_dinery/utils/helpers/helper_functions.dart';
+// import 'package:tasty_dinery/utils/helpers/helper_functions.dart';
 
 class SuccessScreen extends StatelessWidget {
-  final String image, title, subtitle;
+  final String title, subtitle;
+  final String? image;
+  final bool imageRequired;
   final VoidCallback? onPressed;
-  const SuccessScreen(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.subtitle,
-      this.onPressed});
+  const SuccessScreen({
+    super.key,
+    this.image,
+    required this.title,
+    required this.subtitle,
+    this.onPressed,
+    this.imageRequired = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +25,15 @@ class SuccessScreen extends StatelessWidget {
         child: Padding(
           padding: CcSpacingStyle.paddingWithAppBarHeight * 2,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage(image),
-                width: CcHelperFunctions.screenWidth() * .6,
-                height: CcHelperFunctions.screenHeight() * .3,
-              ),
+              // Image(
+              //   image: AssetImage(image!),
+              //   width: CcHelperFunctions.screenWidth() * .6,
+              //   height: CcHelperFunctions.screenHeight() * .35,
+              // ),
 
-              const SizedBox(
-                height: CcSizes.spaceBtnSections,
-              ),
+              const SizedBox(height: 200),
 
               // title and subtitle
               Text(

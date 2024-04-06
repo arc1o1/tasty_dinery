@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasty_dinery/utils/constants/sizes.dart';
-import 'package:tasty_dinery/utils/helpers/helper_functions.dart';
+import 'package:tasty_dinery/common/widgets/images/circular_image.dart';
 
 class CcVerticalImageText extends StatelessWidget {
   const CcVerticalImageText({
@@ -10,37 +9,35 @@ class CcVerticalImageText extends StatelessWidget {
     this.textColor = Colors.white,
     this.backgroundColor,
     this.onTap,
+    this.isNetworkImage = true,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
   final void Function()? onTap;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
-    final dark = CcHelperFunctions.isDarkMode(context);
-
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(left: 15),
         child: Column(
           children: [
-            // circulat icon
-            Container(
+            // circular icon
+            CcCircularImage(
+              image: image,
               width: 55,
               height: 55,
-              padding: const EdgeInsets.all(CcSizes.xs),
-              decoration: BoxDecoration(
-                  color: backgroundColor,
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Image(
-                image: AssetImage(image),
-                fit: BoxFit.cover,
-                color: dark ? Colors.white : Colors.black,
-              ),
+              borderRadius: 10,
+              sWidth: 55,
+              sHeight: 55,
+              sRadius: 10,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: Colors.black,
             ),
 
             const SizedBox(height: 5),

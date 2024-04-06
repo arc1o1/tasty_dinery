@@ -3,6 +3,7 @@ import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/appbar/tabbar.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:tasty_dinery/common/widgets/products/cart/cart_menu_icon.dart';
+import 'package:tasty_dinery/features/shop/controllers/category_contoller.dart';
 import 'package:tasty_dinery/features/shop/screens/search/widget/search_tab.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
@@ -14,8 +15,12 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // controller instantiation
+    final categories = CategoryController.instance.featuredCategories;
+
+    // scaffold
     return DefaultTabController(
-      length: 6,
+      length: categories.length,
       child: Scaffold(
         appBar: CcAppBar(
           title: Center(
@@ -27,7 +32,6 @@ class SearchScreen extends StatelessWidget {
           actions: [
             // cart icon
             CcCartCounterIcon(
-                onPressed: () {},
                 iconColor: CcHelperFunctions.isDarkMode(context)
                     ? CcColors.light
                     : CcColors.dark),
@@ -39,88 +43,79 @@ class SearchScreen extends StatelessWidget {
             return [
               // sliver appbar, enabling scrolling vertically
               SliverAppBar(
-                  leadingWidth: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  automaticallyImplyLeading: false,
-                  pinned: true,
-                  floating: true,
-                  backgroundColor: CcHelperFunctions.isDarkMode(context)
-                      ? CcColors.dark
-                      : Colors.grey.shade300,
-                  expandedHeight:
-                      CcDeviceUtils.getScreenHeight() / 5.5, // the height
+                leadingWidth: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                automaticallyImplyLeading: false,
+                pinned: true,
+                floating: true,
+                backgroundColor: CcHelperFunctions.isDarkMode(context)
+                    ? CcColors.dark
+                    : Colors.grey.shade300,
+                expandedHeight:
+                    CcDeviceUtils.getScreenHeight() / 5.5, // the height
 
-                  // elements are inside a padding widget
-                  flexibleSpace: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        // space
-                        SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
+                // elements are inside a padding widget
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      // space
+                      SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
 
-                        // search bar
-                        CcSearchContainer(
-                            text: 'Search',
-                            showBorder: true,
-                            showBackground: false,
-                            padding: EdgeInsets.zero),
+                      // search bar
+                      CcSearchContainer(
+                          text: 'Search',
+                          showBorder: true,
+                          showBackground: false,
+                          padding: EdgeInsets.zero),
 
-                        SizedBox(height: CcSizes.spaceBtnItems_2),
+                      SizedBox(height: CcSizes.spaceBtnItems_2),
 
-                        // featured brands
-                        // CcSectionHeading(
-                        //     title: 'Featured Brands', onPressed: () {}),
+                      // featured brands
+                      // CcSectionHeading(
+                      //     title: 'Featured Brands', onPressed: () {}),
 
-                        // const SizedBox(height: CcSizes.spaceBtnItems_2 / 1.5),
+                      // const SizedBox(height: CcSizes.spaceBtnItems_2 / 1.5),
 
-                        // Column(
-                        //   children: [
-                        //     for (int i = 0; i < 2; i++)
-                        //       Container(
-                        //         padding: const EdgeInsets.only(bottom: 10),
-                        //         child: Row(
-                        //           children: [
-                        //             CcBrandCard(
-                        //                 showBorder: true,
-                        //                 width: (CcDeviceUtils.getScreenWidth(
-                        //                         context) -
-                        //                     40))
-                        //           ],
-                        //         ),
-                        //       ),
-                        //   ],
-                        // ),
-                      ],
-                    ),
-                  ),
-
-                  // tabs
-                  bottom: const CcTabBar(
-                    tabs: [
-                      Tab(child: Text('Bites')),
-                      Tab(child: Text('Breakfast')),
-                      Tab(child: Text('Lunch')),
-                      Tab(child: Text('Dinner')),
-                      Tab(child: Text('Beverage')),
-                      Tab(child: Text('Smoothie')),
+                      // Column(
+                      //   children: [
+                      //     for (int i = 0; i < 2; i++)
+                      //       Container(
+                      //         padding: const EdgeInsets.only(bottom: 10),
+                      //         child: Row(
+                      //           children: [
+                      //             CcBrandCard(
+                      //                 showBorder: true,
+                      //                 width: (CcDeviceUtils.getScreenWidth(
+                      //                         context) -
+                      //                     40))
+                      //           ],
+                      //         ),
+                      //       ),
+                      //   ],
+                      // ),
                     ],
-                  ))
+                  ),
+                ),
+
+                // tabs
+                bottom: CcTabBar(
+                  tabs: categories
+                      .map((category) => Tab(child: Text(category.name)))
+                      .toList(),
+                ),
+              ),
             ];
           },
 
           // body
-          body: const TabBarView(
-            children: [
-              CcSearchTab(),
-              CcSearchTab(),
-              CcSearchTab(),
-              CcSearchTab(),
-              CcSearchTab(),
-              CcSearchTab(),
-            ],
+          body: TabBarView(
+            children: categories
+                .map((category) => CcSearchTab(category: category))
+                .toList(),
           ),
         ),
       ),

@@ -62,7 +62,6 @@ class VerificationEmailController extends GetxController {
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
         () => SuccessScreen(
-          image: CcImages.success,
           title: CcTexts.accountcreatedTitle,
           subtitle: CcTexts.accountcreatedSubTitle,
           onPressed: () => AuthenticationRepository.instance.screenRedirect(),

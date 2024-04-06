@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:tasty_dinery/common/widgets/favorite_icon/favorite_icon.dart';
 import 'package:tasty_dinery/common/widgets/images/rounded_image.dart';
-import 'package:tasty_dinery/common/widgets/products/cart/add_remove_button.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:tasty_dinery/common/widgets/texts/product_price_text.dart';
 import 'package:tasty_dinery/common/widgets/texts/product_title_text.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_controller.dart';
+import 'package:tasty_dinery/features/shop/models/product_model.dart';
 import 'package:tasty_dinery/features/shop/screens/product_details/product_details_screen.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcProductCardVertical extends StatelessWidget {
-  const CcProductCardVertical({super.key});
+  const CcProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    // controller
+    final controller = ProductController.instance;
+    final cartController = Get.put(CartController());
+
+    // container
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductScreen()),
+      onTap: () => Get.to(() => ProductDetailsScreen(product: product)),
       child: Container(
         width: 320,
         padding: const EdgeInsets.all(1),
@@ -31,13 +41,16 @@ class CcProductCardVertical extends StatelessWidget {
             // thumbnail
             CcRoundedContainer(
               height: 150,
+              width: 95,
               padding: const EdgeInsets.all(CcSizes.sm),
               backgroundColor: Colors.grey.withOpacity(0.2),
 
               // whare all the elements are placed
-              child: const CcRoundedImage(
-                imageUrl: CcImages.productImage3,
+              child: CcRoundedImage(
+                imageUrl: product.thumbnail,
                 applyImageRadius: true,
+                isNetworkImage: true,
+                backgroundColor: Colors.transparent,
               ),
             ),
 
@@ -55,44 +68,25 @@ class CcProductCardVertical extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // food title and brand
-                        const Flexible(
+                        Flexible(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // title text
                               CcProductTitleText(
-                                  title: 'Vegetable Rice & Chicken Stew',
-                                  smallSize: true),
+                                  title: product.title, smallSize: true),
 
-                              SizedBox(height: CcSizes.spaceBtnItems_2 / 2),
+                              const SizedBox(
+                                  height: CcSizes.spaceBtnItems_2 / 2),
 
                               CcBrandTitleWithVerifiedIcon(
-                                  title: '#rice #chicken'),
+                                  title: product.brand!),
                             ],
                           ),
                         ),
 
                         // favorite icon
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(CcSizes.cardRadiusXs),
-                              topRight: Radius.circular(CcSizes.cardRadiusXs),
-                              bottomRight:
-                                  Radius.circular(CcSizes.cardRadiusXs),
-                              bottomLeft: Radius.circular(CcSizes.cardRadiusXs),
-                            ),
-                          ),
-                          child: const SizedBox(
-                            width: CcSizes.iconLg,
-                            height: CcSizes.iconLg,
-                            child: Center(
-                              child: Icon(Icons.favorite_rounded,
-                                  color: Colors.red),
-                            ),
-                          ),
-                        ),
+                        CcFavoriteIcon(productId: product.id),
                       ],
                     ),
 
@@ -116,16 +110,106 @@ class CcProductCardVertical extends StatelessWidget {
                     ),
 
                     // price and cart button
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // price
-                        Flexible(child: CcProductPriceText(price: '10,000')),
 
-                        // const SizedBox(width: 140),
+                    // row (31:36 => ep 52)
+                    Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // price
+                          Flexible(
+                              child: CcProductPriceText(
+                                  price: controller.getProductPrice(product))),
 
-                        CcProductQuantityWithAddRemove(),
-                      ],
+                          // const SizedBox(width: 140),
+
+                          // CcProductQuantityWithAddRemove(),
+
+                          Row(
+                            children: [
+                              // minus from cart
+                              InkWell(
+                                onTap: () {
+                                  final cartItem = cartController
+                                      .convertToCartItem(product, 1);
+
+                                  cartItem.quantity < 1
+                                      ? null
+                                      : cartController
+                                          .removeOneFromCart(cartItem);
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: CcColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      topRight:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      bottomRight:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      bottomLeft:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                    ),
+                                  ),
+                                  child: const SizedBox(
+                                    width: CcSizes.iconLg,
+                                    height: CcSizes.iconLg,
+                                    child: Center(
+                                      child: Icon(Iconsax.minus,
+                                          color: CcColors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              // item count
+                              const SizedBox(width: CcSizes.spaceBtnItems_1),
+                              Text(
+                                  cartController
+                                      .getProductQuantityInCart(product.id)
+                                      .toString(),
+                                  style:
+                                      Theme.of(context).textTheme.titleSmall),
+
+                              const SizedBox(width: CcSizes.spaceBtnItems_1),
+
+                              // add to cart icon
+                              InkWell(
+                                onTap: () {
+                                  final cartItem = cartController
+                                      .convertToCartItem(product, 1);
+
+                                  cartController.addOneToCart(cartItem);
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: CcColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      topRight:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      bottomRight:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                      bottomLeft:
+                                          Radius.circular(CcSizes.cardRadiusXs),
+                                    ),
+                                  ),
+                                  child: const SizedBox(
+                                    width: CcSizes.iconLg,
+                                    height: CcSizes.iconLg,
+                                    child: Center(
+                                      child: Icon(Iconsax.add,
+                                          color: CcColors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

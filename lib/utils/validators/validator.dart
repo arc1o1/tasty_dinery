@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_checkout_controller.dart';
+
 class CcValidator {
   // emppty text validation
   static String? validateEmptyText(String? fieldName, String? value) {
@@ -66,4 +69,62 @@ class CcValidator {
     return null;
   }
   // more custom validators
+
+  // only checkout phone number validator
+  static String? validatePaymentMethodWithPhoneNumber(String? value) {
+    // controller
+    final checkoutController = Get.put(CheckOutController());
+    // final firstThreeNumbers = value?.substring(0, 3);
+
+    if (value == null || value.isEmpty) {
+      return 'phone number is required';
+    } else {
+      final firstThreeNumbers = value.substring(0, 3);
+      final halotelList = ['061', '062'];
+      final airtelList = ['068', '069', '078', '079'];
+      final tigoList = ['065', '067', '071', '077', '073'];
+      final vodacomList = ['074', '075', '076'];
+      final ttclList = ['072', '073'];
+
+      // check 01
+      if (checkoutController.selectedPaymentMethod.value.name ==
+              'Airtel Money' &&
+          !airtelList.contains(firstThreeNumbers)) {
+        return 'Enter Airtel Mobile Number';
+      }
+
+      // check 02
+      if (checkoutController.selectedPaymentMethod.value.name == 'Tigo Pesa' &&
+          !tigoList.contains(firstThreeNumbers)) {
+        return 'Enter Tigo Mobile Number';
+      }
+
+      // check 03
+      if (checkoutController.selectedPaymentMethod.value.name == 'M-Pesa' &&
+          !vodacomList.contains(firstThreeNumbers)) {
+        return 'Enter Vodacom Mobile Number';
+      }
+
+      // check 04
+      if (checkoutController.selectedPaymentMethod.value.name == 'HaloPesa' &&
+          !halotelList.contains(firstThreeNumbers)) {
+        return 'Enter Halotel Mobile Number';
+      }
+
+      // check 05
+      if (checkoutController.selectedPaymentMethod.value.name == 'T-Pesa' &&
+          !ttclList.contains(firstThreeNumbers)) {
+        return 'Enter TTCL Mobile Number';
+      }
+    }
+
+    // regex for phone number validation (assuming 10-digit Tanzania phone number format)
+    final phoneRegExp = RegExp(r'^\d{10}$');
+
+    if (!phoneRegExp.hasMatch(value)) {
+      return 'invalid phone number format (10 digits required)';
+    }
+
+    return null;
+  }
 }

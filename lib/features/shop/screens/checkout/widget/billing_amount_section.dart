@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
+import 'package:tasty_dinery/utils/helpers/pricing_calculator.dart';
 
 class CcBillingAmountSection extends StatelessWidget {
   const CcBillingAmountSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // cart controller
+    final cartController = Get.put(CartController());
+    final subTotal = cartController.totalCartPrice.value;
+
+    // column
     return Column(
       children: [
         // subtotal
@@ -20,7 +28,7 @@ class CcBillingAmountSection extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              "20,000/=",
+              "$subTotal/=",
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -43,7 +51,7 @@ class CcBillingAmountSection extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              "500/=",
+              "${CcPricingCalculator.calculateTax(subTotal, 'Tz')}/=",
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -66,7 +74,7 @@ class CcBillingAmountSection extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              "20,500/=",
+              "${CcPricingCalculator.calculateTotalPrice(subTotal, 'Tz')}/=",
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!

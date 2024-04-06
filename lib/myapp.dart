@@ -1,4 +1,5 @@
 import 'package:tasty_dinery/bindings/general_bindings.dart';
+import 'package:tasty_dinery/routes/app_routes.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: CcTheme.lightTheme,
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
+
       // show a circular progress indicator while authentication repo is deciding what relevant screen to show
       home: const Scaffold(
         backgroundColor: CcColors.primary,

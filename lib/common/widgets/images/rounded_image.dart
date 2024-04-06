@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/shimmer_effects.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 
 class CcRoundedImage extends StatelessWidget {
@@ -44,12 +46,20 @@ class CcRoundedImage extends StatelessWidget {
           borderRadius: applyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
-            fit: fit,
-          ),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  imageUrl: imageUrl,
+                  progressIndicatorBuilder: (context, url, progressIndicator) =>
+                      CcShimmerEffect(
+                          width: width ?? double.infinity,
+                          height: height ?? 160),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(
+                  fit: fit,
+                  image: AssetImage(imageUrl),
+                ),
         ),
       ),
     );

@@ -2,6 +2,8 @@
 
 enum TextSizes { small, medium, large }
 
-enum OrderStatus { processing, pending, served }
+enum OrderStatus { processing, pending, served, cancelled }
 
-enum PaymentMethod { tigoesa, airtelmoney, mpesa, halopesa, tpesa }
+enum PaymentMethod { tigoPesa, airtelMoney, mpesa, halopesa, tpesa }
+
+enum ProductType { single, variable }

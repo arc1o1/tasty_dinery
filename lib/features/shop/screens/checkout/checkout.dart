@@ -3,20 +3,33 @@ import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:tasty_dinery/common/widgets/products/cart/coupon_widget.dart';
-import 'package:tasty_dinery/common/widgets/success_screen/success_screen.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_checkout_controller.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_order_controller.dart';
 import 'package:tasty_dinery/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:tasty_dinery/features/shop/screens/checkout/widget/billing_payment_method_section.dart';
 import 'package:tasty_dinery/features/shop/screens/checkout/widget/billing_amount_section.dart';
-import 'package:tasty_dinery/features/shop/screens/order/order.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
+import 'package:tasty_dinery/utils/helpers/pricing_calculator.dart';
+import 'package:tasty_dinery/utils/popups/loaders.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // controller
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
+
+    // ignore: unused_local_variable
+    final checkoutController = Get.put(CheckOutController());
+
+    final orderController = Get.put(OrderController());
+    final totalAmount = CcPricingCalculator.calculateTotalPrice(subTotal, 'Tz');
+
+    // scaffold
     return Scaffold(
       appBar: CcAppBar(
         showBackArrow: true,
@@ -55,7 +68,7 @@ class CheckoutScreen extends StatelessWidget {
                     // divider
                     Divider(),
 
-                    SizedBox(height: CcSizes.spaceBtnItems_1),
+                    // SizedBox(height: CcSizes.spaceBtnItems_1),
 
                     // payment methods
                     CcBillingPaymentMethodSection(),
@@ -71,17 +84,13 @@ class CheckoutScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: ElevatedButton(
-            onPressed: () => Get.to(
-              () => SuccessScreen(
-                image: CcImages.successScreen,
-                title: "Payment In Progress",
-                subtitle:
-                    "Payment pop-up window didn't show up? \nYou can also pay using control number below: \n\n2024670890",
-                onPressed: () => Get.off(() => const OrderScreen()),
-              ),
-            ),
+            onPressed: subTotal > 0
+                ? () => orderController.processOrder(totalAmount)
+                : () => CcLoaders.warningSnackBar(
+                    title: 'Empty Cart',
+                    message: 'Add Items to cart to proceed.'),
             style: ElevatedButton.styleFrom(backgroundColor: CcColors.primary),
-            child: const Text("Pay Now"),
+            child: Text("Pay $totalAmount/="),
           ),
         ),
       ),

@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-15:/values-vi/values-vi.xml",
+            "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-25:/values-vi/values-vi.xml",
             "map": [
                 {
-                    "source": "/home/techsphere/.gradle/caches/transforms-3/168f69656657bc55ed47a380e965316c/transformed/jetified-play-services-basement-18.2.0/res/values-vi/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "123",
-                        "endOffsets": "318"
-                    },
-                    "to": {
-                        "startLines": "17",
-                        "startColumns": "4",
-                        "startOffsets": "1801",
-                        "endColumns": "127",
-                        "endOffsets": "1924"
-                    }
-                },
-                {
-                    "source": "/home/techsphere/.gradle/caches/transforms-3/680a2964d8a0bce7cbd43c0f88e0420c/transformed/jetified-play-services-base-18.0.1/res/values-vi/values.xml",
+                    "source": "/home/techsphere/.gradle/caches/transforms-3/e0a8793a7a85d6e071b7a743c9adf075/transformed/jetified-play-services-base-18.1.0/res/values-vi/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -52,6 +35,23 @@
                         "startOffsets": "55,152,254,353,453,556,669,3466",
                         "endColumns": "96,101,98,99,102,112,115,100",
                         "endOffsets": "147,249,348,448,551,664,780,3562"
+                    }
+                },
+                {
+                    "source": "/home/techsphere/.gradle/caches/transforms-3/2971e8222b6d8953a900638ba0d233ca/transformed/jetified-play-services-basement-18.3.0/res/values-vi/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "123",
+                        "endOffsets": "318"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "1801",
+                        "endColumns": "127",
+                        "endOffsets": "1924"
                     }
                 },
                 {

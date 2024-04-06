@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/texts/section_heading.dart';
+import 'package:tasty_dinery/features/shop/models/product_model.dart';
 import 'package:tasty_dinery/features/shop/screens/checkout/checkout.dart';
 import 'package:tasty_dinery/features/shop/screens/product_details/widgets/bottom_add_to_cart_widget.dart';
 import 'package:tasty_dinery/features/shop/screens/product_details/widgets/product_attributes.dart';
@@ -11,18 +12,20 @@ import 'package:tasty_dinery/features/shop/screens/product_reviews/product_revie
 import 'package:tasty_dinery/features/shop/screens/product_reviews/widgets/user_review_card.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
-class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
+class ProductDetailsScreen extends StatelessWidget {
+  const ProductDetailsScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CcBottomAddToCart(),
+      bottomNavigationBar: CcBottomAddToCart(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [
             // 1 - product image slider
-            const CcProductImageSlider(),
+            CcProductImageSlider(product: product),
 
             // 2 - product details
             Padding(
@@ -30,13 +33,13 @@ class ProductScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // ratings and share
-                  const CcRatingAndFavorite(),
+                  CcRatingAndFavorite(productId: product.id),
 
                   // price, title, stock and brand
-                  const CcProductMetaData(),
+                  CcProductMetaData(product: product),
 
                   // attributes
-                  const CcProductAttributes(),
+                  CcProductAttributes(product: product),
                   const SizedBox(height: CcSizes.spaceBtnSections),
 
                   // checkout button

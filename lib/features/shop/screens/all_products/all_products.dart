@@ -1,50 +1,74 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
-import 'package:tasty_dinery/common/widgets/layout/grid_layout.dart';
-import 'package:tasty_dinery/common/widgets/products/product_cards/product_cards_vertical.dart';
-import 'package:tasty_dinery/utils/constants/sizes.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/horizontal_shimmer.dart';
+import 'package:tasty_dinery/features/shop/controllers/product_all_products_controller.dart';
+import 'package:tasty_dinery/features/shop/models/product_model.dart';
+import 'package:tasty_dinery/features/shop/screens/all_products/widgets/sortable_products.dart';
 
 class AllProducts extends StatelessWidget {
-  const AllProducts({super.key});
+  const AllProducts({
+    super.key,
+    required this.title,
+    this.query,
+    this.futureMethod,
+  });
+
+  final String title;
+  final Query? query;
+  final Future<List<ProductModel>>? futureMethod;
 
   @override
   Widget build(BuildContext context) {
+    // initialize controller for managing product fetching
+    final controller = Get.put(AllProductsController());
+
+    // scaffold
     return Scaffold(
-      appBar: const CcAppBar(
-        title: Text("Popular Products"),
+      appBar: CcAppBar(
+        title: Text(title),
         centerTitle: true,
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              // filter bar
-              DropdownButtonFormField(
-                decoration: const InputDecoration(prefixIcon: Icon(Icons.sort)),
-                onChanged: (value) {},
-                items: [
-                  "Name",
-                  "Higher Price",
-                  "Lower Price",
-                  "Sale",
-                  "Newest",
-                  "Popularity",
-                ]
-                    .map((option) =>
-                        DropdownMenuItem(value: option, child: Text(option)))
-                    .toList(),
-              ),
+          child: FutureBuilder(
+              future: futureMethod ?? controller.fetchProductsByQuery(query),
+              builder: (context, snapshot) {
+                // check the state of the future builder snapshot
+                const loader = CcHorizontalProductShimmer();
 
-              const SizedBox(height: CcSizes.spaceBtnSections),
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return loader;
+                }
 
-              CcGridLayout(
-                itemCount: 5,
-                itemBuilder: (_, index) => const CcProductCardVertical(),
-              ),
-            ],
-          ),
+                if (!snapshot.hasData ||
+                    snapshot.data == null ||
+                    snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No Data Found'));
+                }
+
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Something went wrong.'));
+                }
+
+                /*
+                // You can use the following instead of if's above
+
+                final widget = CcCloudHelperFunctions.checkMultiRecordState(
+                    snapshot: snapshot, loader: loader);
+
+                if (widget != null) return widget;
+
+                */
+
+                // product found
+                final products = snapshot.data!;
+
+                return CcSortableProducts(products: products);
+              }),
         ),
       ),
     );

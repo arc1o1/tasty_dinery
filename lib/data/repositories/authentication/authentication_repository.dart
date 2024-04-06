@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tasty_dinery/data/repositories/user/user_repository.dart';
 import 'package:tasty_dinery/features/authentication/screens/1_onboarding/onboarding_view.dart';
 import 'package:tasty_dinery/features/authentication/screens/2_login/login.dart';
 import 'package:tasty_dinery/features/authentication/screens/3_signup/verify_email.dart';
@@ -13,6 +14,7 @@ import 'package:tasty_dinery/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/firebase_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/format_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/platform_exceptions.dart';
+import 'package:tasty_dinery/utils/local_storage/storage_utility.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -20,6 +22,9 @@ class AuthenticationRepository extends GetxController {
   // variable
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+
+  // get authenticated user data
+  User? get authUser => _auth.currentUser;
 
   // called from main.dart on launch
   @override
@@ -39,6 +44,9 @@ class AuthenticationRepository extends GetxController {
     if (user != null) {
       // if user is logged in
       if (user.emailVerified) {
+        // initializze user specific storage
+        await CcLocalStorage.init(user.uid);
+
         // If user email is verified, go to the main Navigation menu
         Get.offAll(() => const NavigationMenu());
       } else {
@@ -131,6 +139,27 @@ class AuthenticationRepository extends GetxController {
   }
 
   // re-authenticate user
+  Future<void> reAuthenticateWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      // create credential
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+
+      // reauthenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw CcFirebaseAuthException(code: e.code).message;
+    } on FirebaseException catch (e) {
+      throw CcFirebaseException(code: e.code).message;
+    } on FormatException catch (_) {
+      throw const CcFFormatException();
+    } on PlatformException catch (e) {
+      throw CcPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again";
+    }
+  }
 
   /* --------------- federated identity and social sign in ---------------------------------*/
 
@@ -166,7 +195,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // Facebook Authentication => Apple Authentication
+  // Facebook Authentication => Apple Authentication => instagram authentication
 
   /* ---------------./end federated identity and social sign in ---------------------------------*/
 
@@ -174,7 +203,6 @@ class AuthenticationRepository extends GetxController {
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
-      Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw CcFirebaseAuthException(code: e.code).message;
     } on FirebaseException catch (e) {
@@ -188,5 +216,21 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // delete user
+  // delete user => remove auth and firestore account
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      throw CcFirebaseAuthException(code: e.code).message;
+    } on FirebaseException catch (e) {
+      throw CcFirebaseException(code: e.code).message;
+    } on FormatException catch (_) {
+      throw const CcFFormatException();
+    } on PlatformException catch (e) {
+      throw CcPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again";
+    }
+  }
 }

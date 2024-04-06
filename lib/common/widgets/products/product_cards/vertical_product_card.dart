@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:tasty_dinery/common/widgets/favorite_icon/favorite_icon.dart';
 import 'package:tasty_dinery/common/widgets/images/rounded_image.dart';
-// import 'package:tasty_dinery/common/widgets/products/cart/add_remove_button.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_with_verified_icon.dart';
+import 'package:tasty_dinery/features/shop/models/product_model.dart';
 import 'package:tasty_dinery/features/shop/screens/product_details/product_details_screen.dart';
-// import 'package:tasty_dinery/common/widgets/texts/product_price_text.dart';
-// import 'package:tasty_dinery/common/widgets/texts/product_title_text.dart';
-import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcVerticalProductCard extends StatelessWidget {
-  const CcVerticalProductCard({
-    super.key,
-    // required this.isNetworkImage,
-    // required this.imageUrl,
-  });
-
-  // final bool isNetworkImage;
-  // final String imageUrl;
+  const CcVerticalProductCard({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       child: Container(
-        padding: const EdgeInsets.all(0),
+        padding: EdgeInsets.zero,
         width: 160,
         height: 305,
         decoration: BoxDecoration(
@@ -37,16 +29,20 @@ class CcVerticalProductCard extends StatelessWidget {
           children: [
             // image
             GestureDetector(
-              onTap: () => Get.to(() => const ProductScreen()),
+              onTap: () => Get.to(() => ProductDetailsScreen(
+                    product: product,
+                  )),
               child: CcRoundedContainer(
                 width: 160,
                 padding: const EdgeInsets.all(CcSizes.sm),
                 backgroundColor: Colors.grey.withOpacity(0.2),
 
                 // whare all the elements are placed
-                child: const CcRoundedImage(
-                  imageUrl: CcImages.productImage3,
+                child: CcRoundedImage(
+                  imageUrl: product.thumbnail,
+                  isNetworkImage: true,
                   applyImageRadius: true,
+                  backgroundColor: Colors.transparent,
                 ),
               ),
             ),
@@ -58,7 +54,7 @@ class CcVerticalProductCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Vegetable Rice & Chicken Stew",
+                    product.title,
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         overflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.bold),
@@ -67,7 +63,7 @@ class CcVerticalProductCard extends StatelessWidget {
                   const SizedBox(height: CcSizes.spaceBtnItems_2 / 2),
 
                   // brand text
-                  const CcBrandTitleWithVerifiedIcon(title: '#rice #chicken'),
+                  CcBrandTitleWithVerifiedIcon(title: product.brand!),
 
                   const SizedBox(height: CcSizes.spaceBtnItems_2 / 2),
 
@@ -113,7 +109,7 @@ class CcVerticalProductCard extends StatelessWidget {
                               Text("Price  :  ",
                                   style:
                                       Theme.of(context).textTheme.labelLarge),
-                              Text("10,000",
+                              Text(product.price.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelLarge!
@@ -126,25 +122,7 @@ class CcVerticalProductCard extends StatelessWidget {
                       ),
 
                       // favorite icon
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(CcSizes.cardRadiusXs),
-                            topRight: Radius.circular(CcSizes.cardRadiusXs),
-                            bottomRight: Radius.circular(CcSizes.cardRadiusXs),
-                            bottomLeft: Radius.circular(CcSizes.cardRadiusXs),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: CcSizes.iconLg,
-                          height: CcSizes.iconLg,
-                          child: Center(
-                            child:
-                                Icon(Icons.favorite_rounded, color: Colors.red),
-                          ),
-                        ),
-                      ),
+                      CcFavoriteIcon(productId: product.id),
                     ],
                   ),
                 ],

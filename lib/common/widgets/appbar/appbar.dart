@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/images/circular_image.dart';
+import 'package:tasty_dinery/features/personnalization/controllers/user_controller.dart';
 import 'package:tasty_dinery/features/personnalization/screens/settings/settings.dart';
+import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/devices/device_utility.dart';
+import 'package:tasty_dinery/common/widgets/shimmer/shimmer_effects.dart';
 
 class CcAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CcAppBar({
@@ -37,6 +40,10 @@ class CcAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    // controller instantiation
+    final controller = Get.put(UserController());
+
+    // padding
     return Padding(
       padding: padding,
       child: AppBar(
@@ -47,15 +54,27 @@ class CcAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
               )
             : showProfile
-                ? GestureDetector(
-                    onTap: () => Get.to(() => const SettingsScreen()),
-                    child: CcCircularImage(
-                      image: imageString!,
-                      width: imageWidth!,
-                      height: imageHeight!,
-                      padding: imagePadding!,
-                      backgroundColor: imageBackgroundColor,
-                    ),
+                ? Obx(
+                    () {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty
+                          ? networkImage
+                          : CcImages.user2;
+
+                      return controller.imageUploading.value
+                          ? const CcShimmerEffect(
+                              width: 100, height: 100, radius: 100)
+                          : GestureDetector(
+                              onTap: () => Get.to(() => const SettingsScreen()),
+                              child: CcCircularImage(
+                                image: image,
+                                width: 50,
+                                height: 50,
+                                isNetworkImage: networkImage.isNotEmpty,
+                                backgroundColor: imageBackgroundColor,
+                              ),
+                            );
+                    },
                   )
                 : IconButton(
                     onPressed: leadingOnPressed,

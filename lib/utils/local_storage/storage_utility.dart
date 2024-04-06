@@ -1,24 +1,41 @@
 import 'package:get_storage/get_storage.dart';
 
 class CcLocalStorage {
-  static final CcLocalStorage _instance = CcLocalStorage._internal();
+  // var
+  late final GetStorage _storage;
 
-  factory CcLocalStorage() {
-    return _instance;
-  }
+  // singleton instance
+  static CcLocalStorage? _instance;
 
   CcLocalStorage._internal();
 
-  final _storage = GetStorage();
+  factory CcLocalStorage.instance() {
+    _instance ??= CcLocalStorage._internal();
+
+    return _instance!;
+  }
+
+  static Future<void> init(String buckettName) async {
+    await GetStorage.init(buckettName);
+
+    _instance = CcLocalStorage._internal();
+
+    _instance!._storage = GetStorage(buckettName);
+  }
 
   // generic method to save data
-  Future<void> saveData<Cc>(String key, Cc value) async {
+  Future<void> saveData<T>(String key, T value) async {
+    await _storage.write(key, value);
+  }
+
+  // generic method to save data
+  Future<void> writeData<T>(String key, T value) async {
     await _storage.write(key, value);
   }
 
   // generic method to read data
-  Cc? readData<Cc>(String key) {
-    return _storage.read<Cc>(key);
+  T? readData<T>(String key) {
+    return _storage.read<T>(key);
   }
 
   // generic method to remove data
@@ -30,4 +47,19 @@ class CcLocalStorage {
   Future<void> clearAll() async {
     await _storage.erase();
   }
+
+  // instantiation
+  // LocalStorage localStorage = LocalStorage();
+
+  // read data
+  // String? username = localStorage.readData<String>('username');
+
+  // save data
+  // localStorage.saveData('username', 'mwesiga');
+
+  // remove data
+  // localStorage.removeData('username');
+
+  // clear all
+  // localStorage.clearAll();
 }

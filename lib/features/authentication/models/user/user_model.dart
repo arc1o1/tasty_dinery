@@ -72,7 +72,7 @@ class UserModel {
     return UserModel(
       id: document.id,
       firstName: data['FirstName'] ?? '',
-      lastName: data['FirstName'] ?? '',
+      lastName: data['LastName'] ?? '',
       userName: data['Username'] ?? '',
       email: data['Email'] ?? '',
       phoneNumber: data['PhoneNumber'] ?? '',
