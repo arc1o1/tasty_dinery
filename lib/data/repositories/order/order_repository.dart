@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/data/repositories/authentication/authentication_repository.dart';
-import 'package:tasty_dinery/features/shop/models/order_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/order_model.dart';
 import 'package:tasty_dinery/utils/popups/loaders.dart';
 
 class OrderRepository extends GetxController {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tasty_dinery/features/shop/controllers/favorites_controller.dart';
+import 'package:tasty_dinery/features/client/shop/controllers/favorites_controller.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcFavoriteIcon extends StatelessWidget {

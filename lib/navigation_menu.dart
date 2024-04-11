@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tasty_dinery/features/personnalization/screens/settings/settings.dart';
-import 'package:tasty_dinery/features/shop/screens/order/order.dart';
-import 'package:tasty_dinery/features/shop/screens/search/search_meal.dart';
-import 'package:tasty_dinery/features/shop/screens/home/home.dart';
-import 'package:tasty_dinery/features/shop/screens/wishlist/wishlist.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
+import 'package:tasty_dinery/features/client/personnalization/screens/settings/settings.dart';
+import 'package:tasty_dinery/features/client/shop/screens/home/home.dart';
+import 'package:tasty_dinery/features/client/shop/screens/order/order.dart';
+import 'package:tasty_dinery/features/client/shop/screens/search/search_meal.dart';
+import 'package:tasty_dinery/features/client/shop/screens/wishlist/wishlist.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 

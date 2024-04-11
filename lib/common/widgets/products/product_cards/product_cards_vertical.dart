@@ -7,10 +7,10 @@ import 'package:tasty_dinery/common/widgets/images/rounded_image.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_with_verified_icon.dart';
 import 'package:tasty_dinery/common/widgets/texts/product_price_text.dart';
 import 'package:tasty_dinery/common/widgets/texts/product_title_text.dart';
-import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
-import 'package:tasty_dinery/features/shop/controllers/product_controller.dart';
-import 'package:tasty_dinery/features/shop/models/product_model.dart';
-import 'package:tasty_dinery/features/shop/screens/product_details/product_details_screen.dart';
+import 'package:tasty_dinery/features/client/shop/controllers/product_cart_controller.dart';
+import 'package:tasty_dinery/features/client/shop/controllers/product_controller.dart';
+import 'package:tasty_dinery/features/client/shop/models/product_model.dart';
+import 'package:tasty_dinery/features/client/shop/screens/product_details/product_details_screen.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 

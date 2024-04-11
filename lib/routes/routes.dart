@@ -23,4 +23,13 @@ class CcRoutes {
   static const resetPassword = '/reset-password';
   static const forgotPassword = '/forgot-password';
   static const onboarding = '/onboarding';
+  static const adminDashboard = '/admin-dashboard';
+  static const adminBanners = '/admin-banners';
+  static const adminCategories = '/admin-categories';
+  static const adminCustomers = '/admin-customers';
+  static const adminLogout = '/admin-logout';
+  static const adminMedia = '/admin-media';
+  static const adminOrders = '/admin-orders';
+  static const adminProducts = '/admin-products';
+  static const adminSettings = '/admin-settings';
 }

@@ -28,6 +28,9 @@ dependencies:
   shimmer: ^3.0.0
   image_picker: ^1.0.4
 
+  # charts
+  syncfusion_flutter_charts: ^24.2.9
+
   # icons
 
   cupertino_icons: ^1.0.2
@@ -56,11 +59,28 @@ dependencies:
   cloud_firestore: ^4.14.0
   firebase_auth: ^4.17.8
   google_sign_in: ^6.2.1
-  sign_in_with_apple: ^5.0.0
   firebase_storage: ^11.5.4
   cached_network_image: ^3.3.1
   azampay: ^0.0.1
-  pay: ^2.0.0
+  # pay: ^2.0.0
+
+
+# // Flutter Fix ─────────────────────────────────────────────────────────────────────────────────┐
+# // │ The plugin pay_android requires a higher Android SDK version.                                 │
+# // │ Fix this issue by adding the following to the file /home/techsphere/Documents/fourth          │
+# // │ year/fyp/project/tasty_dinery/android/app/build.gradle:                                       │
+# // │ android {                                                                                     │
+# // │   defaultConfig {                                                                             │
+# // │     minSdkVersion 21                                                                          │
+# // │   }                                                                                           │
+# // │ }                                                                                             │
+# // │                                                                                               │
+# // │ Following this change, your app will not be available to users running Android SDKs below 21. │
+# // │ Consider searching for a version of this plugin that supports these lower versions of the     │
+# // │ Android SDK instead.                                                                          │
+# // │ For more information, see:                                                                    │
+# // │ https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration          │
+# // └───────────────────────────────────────────────────────────────────────────────────────────────┘
   
 
 

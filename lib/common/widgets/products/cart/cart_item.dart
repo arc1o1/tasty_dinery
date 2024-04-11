@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasty_dinery/common/widgets/images/rounded_image.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_text.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_with_verified_icon.dart';
-import 'package:tasty_dinery/features/shop/models/cart_item_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/cart_item_model.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/enums.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';

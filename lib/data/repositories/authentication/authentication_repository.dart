@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -6,15 +7,17 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tasty_dinery/data/repositories/user/user_repository.dart';
-import 'package:tasty_dinery/features/authentication/screens/1_onboarding/onboarding_view.dart';
-import 'package:tasty_dinery/features/authentication/screens/2_login/login.dart';
-import 'package:tasty_dinery/features/authentication/screens/3_signup/verify_email.dart';
+import 'package:tasty_dinery/features/admin/dashboard_starter/dashboard_starter.dart';
+import 'package:tasty_dinery/features/client/authentication/screens/1_onboarding/onboarding_view.dart';
+import 'package:tasty_dinery/features/client/authentication/screens/2_login/login.dart';
+import 'package:tasty_dinery/features/client/authentication/screens/3_signup/verify_email.dart';
 import 'package:tasty_dinery/navigation_menu.dart';
 import 'package:tasty_dinery/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/firebase_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/format_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/platform_exceptions.dart';
 import 'package:tasty_dinery/utils/local_storage/storage_utility.dart';
+import 'package:tasty_dinery/utils/popups/loaders.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -47,8 +50,26 @@ class AuthenticationRepository extends GetxController {
         // initializze user specific storage
         await CcLocalStorage.init(user.uid);
 
-        // If user email is verified, go to the main Navigation menu
-        Get.offAll(() => const NavigationMenu());
+        // check if the user is a client or admin
+        await FirebaseFirestore.instance
+            .collection("Users")
+            .doc(user.uid)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists &&
+              documentSnapshot.get("Role") == "client") {
+            // If user email is verified, go to the main Navigation menu
+            Get.offAll(() => const NavigationMenu());
+          } else if (documentSnapshot.exists &&
+              documentSnapshot.get("Role") == "admin") {
+            // if admin go direct to the dashboard
+            Get.offAll(() => const AdminDashboardStarter());
+          } else {
+            CcLoaders.errorSnackBar(
+                title: "Oh Snap!",
+                message: "Document does not exist in the database.");
+          }
+        });
       } else {
         // if user's email is not verified, go to verifyemailscreen
         Get.offAll(() => VerifyEmail(email: _auth.currentUser?.email));

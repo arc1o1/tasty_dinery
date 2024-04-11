@@ -290,12 +290,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "flutter_localizations",
-      "rootUri": "file:///home/techsphere/snap/flutter/common/flutter/packages/flutter_localizations",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
       "name": "flutter_native_splash",
       "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/flutter_native_splash-2.3.10",
       "packageUri": "lib/",
@@ -572,30 +566,6 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "pay",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/pay-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "pay_android",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/pay_android-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "pay_ios",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/pay_ios-1.0.11",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "pay_platform_interface",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/pay_platform_interface-1.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
       "name": "petitparser",
       "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/petitparser-6.0.2",
       "packageUri": "lib/",
@@ -698,24 +668,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "sign_in_with_apple",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/sign_in_with_apple-5.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "sign_in_with_apple_platform_interface",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/sign_in_with_apple_platform_interface-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "sign_in_with_apple_web",
-      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/sign_in_with_apple_web-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "sky_engine",
       "rootUri": "file:///home/techsphere/snap/flutter/common/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -768,6 +720,18 @@
       "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "syncfusion_flutter_charts",
+      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-24.2.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "syncfusion_flutter_core",
+      "rootUri": "file:///home/techsphere/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-24.2.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "synchronized",
@@ -896,7 +860,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-04T17:05:01.694273Z",
+  "generated": "2024-04-11T16:24:21.568029Z",
   "generator": "pub",
   "generatorVersion": "3.2.5"
 }

@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasty_dinery/data/repositories/authentication/authentication_repository.dart';
-import 'package:tasty_dinery/features/authentication/models/user/user_model.dart';
+import 'package:tasty_dinery/features/client/authentication/models/user/user_model.dart';
 import 'package:tasty_dinery/utils/exceptions/firebase_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/format_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/platform_exceptions.dart';

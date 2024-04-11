@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tasty_dinery/features/authentication/controllers/login/login_controller.dart';
+import 'package:tasty_dinery/features/client/authentication/controllers/login/login_controller.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';

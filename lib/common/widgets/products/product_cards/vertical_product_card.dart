@@ -4,8 +4,8 @@ import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_con
 import 'package:tasty_dinery/common/widgets/favorite_icon/favorite_icon.dart';
 import 'package:tasty_dinery/common/widgets/images/rounded_image.dart';
 import 'package:tasty_dinery/common/widgets/texts/brand_title_with_verified_icon.dart';
-import 'package:tasty_dinery/features/shop/models/product_model.dart';
-import 'package:tasty_dinery/features/shop/screens/product_details/product_details_screen.dart';
+import 'package:tasty_dinery/features/client/shop/models/product_model.dart';
+import 'package:tasty_dinery/features/client/shop/screens/product_details/product_details_screen.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
 class CcVerticalProductCard extends StatelessWidget {

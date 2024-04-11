@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tasty_dinery/features/shop/controllers/product_cart_controller.dart';
-import 'package:tasty_dinery/features/shop/screens/cart/cart.dart';
+import 'package:tasty_dinery/features/client/shop/controllers/product_cart_controller.dart';
+import 'package:tasty_dinery/features/client/shop/screens/cart/cart.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 
 class CcCartCounterIcon extends StatelessWidget {

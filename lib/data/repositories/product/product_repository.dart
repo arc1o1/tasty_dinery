@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/data/services/cloud_storage/firebase_storage_service.dart';
-import 'package:tasty_dinery/features/shop/models/product_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/product_model.dart';
 import 'package:tasty_dinery/utils/exceptions/firebase_exceptions.dart';
 import 'package:tasty_dinery/utils/exceptions/platform_exceptions.dart';
 import 'package:tasty_dinery/utils/popups/loaders.dart';

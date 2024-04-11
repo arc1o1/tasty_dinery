@@ -1,6 +1,6 @@
-import 'package:tasty_dinery/features/shop/models/banner_model.dart';
-import 'package:tasty_dinery/features/shop/models/category_model.dart';
-import 'package:tasty_dinery/features/shop/models/product_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/banner_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/category_model.dart';
+import 'package:tasty_dinery/features/client/shop/models/product_model.dart';
 import 'package:tasty_dinery/routes/routes.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 

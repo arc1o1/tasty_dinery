@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasty_dinery/common/widgets/images/circular_image.dart';
-import 'package:tasty_dinery/features/personnalization/controllers/user_controller.dart';
-import 'package:tasty_dinery/features/personnalization/screens/settings/settings.dart';
+import 'package:tasty_dinery/features/client/personnalization/controllers/user_controller.dart';
+import 'package:tasty_dinery/features/client/personnalization/screens/settings/settings.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/devices/device_utility.dart';
 import 'package:tasty_dinery/common/widgets/shimmer/shimmer_effects.dart';

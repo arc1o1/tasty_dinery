@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tasty_dinery/features/shop/controllers/product_checkout_controller.dart';
+import 'package:tasty_dinery/features/client/shop/controllers/product_checkout_controller.dart';
 
 class CcValidator {
   // emppty text validation
