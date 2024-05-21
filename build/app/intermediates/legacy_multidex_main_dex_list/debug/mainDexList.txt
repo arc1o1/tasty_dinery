@@ -136,7 +136,6 @@ androidx/lifecycle/LifecycleCoroutineScope.class
 androidx/lifecycle/LifecycleRegistry.class
 androidx/lifecycle/OnLifecycleEvent.class
 androidx/lifecycle/PausingDispatcherKt.class
-androidx/lifecycle/Transformations.class
 androidx/lifecycle/ViewTreeViewModelKt.class
 androidx/lifecycle/viewmodel/ViewModelFactoryDsl.class
 androidx/multidex/MultiDex$V14$ElementConstructor.class
@@ -163,8 +162,6 @@ androidx/viewpager/widget/ViewPager$DecorView.class
 androidx/window/core/ExperimentalWindowApi.class
 androidx/window/embedding/SplitRule$LayoutDir.class
 com/google/android/gms/auth/api/accounttransfer/AuthenticatorTransferCompletionStatus.class
-com/google/android/gms/auth/api/credentials/Credential.class
-com/google/android/gms/auth/api/credentials/CredentialPickerConfig$Prompt.class
 com/google/android/gms/auth/api/phone/SmsCodeAutofillClient$PermissionState.class
 com/google/android/gms/common/AccountPicker.class
 com/google/android/gms/common/BlockingServiceConnection.class
@@ -344,6 +341,7 @@ io/flutter/FlutterInjector.class
 io/flutter/app/FlutterApplication.class
 io/flutter/app/FlutterMultiDexApplication.class
 io/flutter/embedding/engine/loader/FlutterLoader.class
+io/flutter/plugins/imagepicker/Messages$CanIgnoreReturnValue.class
 io/grpc/CallOptions.class
 io/grpc/EquivalentAddressGroup$Attr.class
 io/grpc/ExperimentalApi.class

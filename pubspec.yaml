@@ -30,6 +30,8 @@ dependencies:
 
   # charts
   syncfusion_flutter_charts: ^24.2.9
+  fl_chart: ^0.67.0
+  scrollable_table_view: ^2.0.3
 
   # icons
 

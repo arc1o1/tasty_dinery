@@ -19,31 +19,31 @@ class AdminDrawerList extends StatelessWidget {
               Icons.dashboard_rounded,
               () => navigate(0),
               Get.currentRoute == CcRoutes.adminDashboard
-                  ? Colors.blue
+                  ? Colors.lightBlue
                   : Colors.transparent,
               Get.currentRoute == CcRoutes.adminDashboard
                   ? Colors.white
                   : Colors.black),
-          menuItem(
-              "Media",
-              Icons.image_rounded,
-              () => navigate(1),
-              Get.currentRoute == CcRoutes.adminMedia
-                  ? Colors.blue
-                  : Colors.transparent,
-              Get.currentRoute == CcRoutes.adminMedia
-                  ? Colors.white
-                  : Colors.black),
-          menuItem(
-              "Banners",
-              Icons.post_add_rounded,
-              () => navigate(2),
-              Get.currentRoute == CcRoutes.adminBanners
-                  ? Colors.blue
-                  : Colors.transparent,
-              Get.currentRoute == CcRoutes.adminBanners
-                  ? Colors.white
-                  : Colors.black),
+          // menuItem(
+          //     "Media",
+          //     Icons.image_rounded,
+          //     () => navigate(1),
+          //     Get.currentRoute == CcRoutes.adminMedia
+          //         ? Colors.blue
+          //         : Colors.transparent,
+          //     Get.currentRoute == CcRoutes.adminMedia
+          //         ? Colors.white
+          //         : Colors.black),
+          // menuItem(
+          //     "Banners",
+          //     Icons.post_add_rounded,
+          //     () => navigate(2),
+          //     Get.currentRoute == CcRoutes.adminBanners
+          //         ? Colors.blue
+          //         : Colors.transparent,
+          //     Get.currentRoute == CcRoutes.adminBanners
+          //         ? Colors.white
+          //         : Colors.black),
           menuItem(
               "Products",
               Icons.shop_2_rounded,
@@ -94,16 +94,16 @@ class AdminDrawerList extends StatelessWidget {
               Get.currentRoute == CcRoutes.adminSettings
                   ? Colors.white
                   : Colors.black),
-          menuItem(
-              "Logout",
-              Icons.logout_rounded,
-              () => navigate(8),
-              Get.currentRoute == CcRoutes.adminLogout
-                  ? Colors.blue
-                  : Colors.transparent,
-              Get.currentRoute == CcRoutes.adminLogout
-                  ? Colors.white
-                  : Colors.black),
+          // menuItem(
+          //     "Logout",
+          //     Icons.logout_rounded,
+          //     () => navigate(8),
+          //     Get.currentRoute == CcRoutes.adminLogout
+          //         ? Colors.blue
+          //         : Colors.transparent,
+          //     Get.currentRoute == CcRoutes.adminLogout
+          //         ? Colors.white
+          //         : Colors.black),
         ],
       ),
     );

@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:tasty_dinery/features/client/personnalization/controllers/user_controller.dart';
 import 'package:tasty_dinery/features/client/shop/controllers/product_cart_controller.dart';
 import 'package:tasty_dinery/features/client/shop/controllers/product_order_controller.dart';
 import 'package:tasty_dinery/features/client/shop/models/cart_item_model.dart';
 import 'package:tasty_dinery/features/client/shop/models/order_model.dart';
+import 'package:tasty_dinery/features/client/shop/screens/order_details/widgets/full_screen_qrcode.dart';
 import 'package:tasty_dinery/utils/constants/image_strings.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 
@@ -26,6 +28,10 @@ class OrderDetailsScreen extends StatelessWidget {
     // ignore: unused_local_variable
     final cartController = Get.put(CartController());
 
+    final userController = Get.put(UserController());
+
+    String qrcodeData = userController.user.value.id + order.id;
+
     // scaffold
     return Scaffold(
       appBar: CcAppBar(
@@ -41,12 +47,15 @@ class OrderDetailsScreen extends StatelessWidget {
           children: [
             // QR Code takes one argument from the database which is "order id"
             // inrease the height of the container for more clarification
-            Container(
-              padding: const EdgeInsets.only(bottom: 5),
-              color: Colors.transparent,
-              height: 250,
-              child: QrImageView(
-                data: order.id,
+            InkWell(
+              onTap: () => Get.to(() =>  FullScreenQRCode(data: qrcodeData)),
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 5),
+                color: Colors.transparent,
+                height: 250,
+                child: QrImageView(
+                  data: qrcodeData,
+                ),
               ),
             ),
 
@@ -180,7 +189,7 @@ class OrderDetailsScreen extends StatelessWidget {
                           // 01
                           // total price without vat
                           Text(
-                            '${order.totalAmount}/=',
+                            '${(order.totalAmount) / 1.01}/=',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           Text(
@@ -194,28 +203,32 @@ class OrderDetailsScreen extends StatelessWidget {
                           // payment method
                           Row(
                             children: [
-                              CcRoundedContainer(
-                                  width: 35,
-                                  height: 35,
-                                  backgroundColor: Colors.transparent,
-                                  padding: const EdgeInsets.all(CcSizes.sm),
-                                  child: Image(
-                                      image: AssetImage(
-                                        order.paymentMethod == 'Airtel Money'
-                                            ? CcImages.airtel
-                                            : order.paymentMethod == 'Tigo Pesa'
-                                                ? CcImages.tigo
-                                                : order.paymentMethod ==
-                                                        'Halo Pesa'
-                                                    ? CcImages.halotel
-                                                    : order.paymentMethod ==
-                                                            'M-Pesa'
-                                                        ? CcImages.vodacom
-                                                        : CcImages.ttcl,
-                                      ),
-                                      fit: BoxFit.contain)),
+                              // text
                               Text(order.paymentMethod,
                                   style: Theme.of(context).textTheme.bodyLarge),
+
+                              // image
+                              CcRoundedContainer(
+                                width: 35,
+                                height: 35,
+                                backgroundColor: Colors.transparent,
+                                padding: const EdgeInsets.all(CcSizes.sm),
+                                child: Image(
+                                  image: AssetImage(
+                                    order.paymentMethod == 'Airtel Money'
+                                        ? CcImages.airtel
+                                        : order.paymentMethod == 'Tigo Pesa'
+                                            ? CcImages.tigo
+                                            : order.paymentMethod == 'Halo Pesa'
+                                                ? CcImages.halotel
+                                                : order.paymentMethod ==
+                                                        'M-Pesa'
+                                                    ? CcImages.vodacom
+                                                    : CcImages.ttcl,
+                                  ),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ],
                           ),
                           Text('Payment Method',
@@ -303,13 +316,23 @@ class CcBoughtProductItems extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '${itemBought.title} x ${itemBought.quantity}',
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.transparent,
+            width: 175,
+            child: Text(
+              '${itemBought.title} x ${itemBought.quantity}',
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          Text(
-            '${itemBought.price * itemBought.quantity}',
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.transparent,
+            width: 89,
+            child: Text(
+              '${itemBought.price * itemBought.quantity}',
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),

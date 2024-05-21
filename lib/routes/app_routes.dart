@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tasty_dinery/features/admin/settings/admin_logout_screen.dart';
 import 'package:tasty_dinery/features/admin/settings/admin_setings_screen.dart';
-import 'package:tasty_dinery/features/admin/shop/banners/admin_banners_screen.dart';
 import 'package:tasty_dinery/features/admin/shop/categories/admin_categories_screen.dart';
-import 'package:tasty_dinery/features/admin/shop/dashboard/admin_dashboard_screen.dart';
-import 'package:tasty_dinery/features/admin/shop/media/admin_media_screen.dart';
+import 'package:tasty_dinery/features/admin/dashboard_starter/admin_dashboard_screen.dart';
 import 'package:tasty_dinery/features/admin/shop/orders/admin_orders_screen.dart';
 import 'package:tasty_dinery/features/admin/shop/products/admin_products_screen.dart';
 import 'package:tasty_dinery/features/admin/users/customers/admin_customers_screen.dart';
@@ -49,13 +47,13 @@ class AppRoutes {
 
     // admin pages
 
-    GetPage(name: CcRoutes.adminBanners, page: () => const AdminBanners()),
+    // GetPage(name: CcRoutes.adminBanners, page: () => const AdminBanners()),
     GetPage(
         name: CcRoutes.adminCategories, page: () => const AdminCategories()),
     GetPage(name: CcRoutes.adminCustomers, page: () => const AdminCustomers()),
     GetPage(name: CcRoutes.adminDashboard, page: () => const AdminDashboard()),
     GetPage(name: CcRoutes.adminLogout, page: () => const AdminLogout()),
-    GetPage(name: CcRoutes.adminMedia, page: () => const AdminMedia()),
+    // GetPage(name: CcRoutes.adminMedia, page: () => const AdminMedia()),
     GetPage(name: CcRoutes.adminOrders, page: () => const AdminOrders()),
     GetPage(name: CcRoutes.adminProducts, page: () => const AdminProducts()),
     GetPage(name: CcRoutes.adminSettings, page: () => const AdminSettings()),

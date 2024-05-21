@@ -4,7 +4,7 @@
             "outputFile": "com.example.tasty_dinery.app-mergeDebugResources-25:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/home/techsphere/.gradle/caches/transforms-3/4404bb8721373756f4fc8fd34059d6c0/transformed/jetified-play-services-auth-20.7.0/res/values-watch-v20/values.xml",
+                    "source": "/home/mwesiga/.gradle/caches/transforms-3/a1cb5f9282e217f7e2ac7dbaa94bb3d3/transformed/jetified-play-services-auth-21.0.0/res/values-watch-v20/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",

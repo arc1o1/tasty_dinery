@@ -56,7 +56,7 @@ class CcProductCardVertical extends StatelessWidget {
 
             // details
             SizedBox(
-              width: 260,
+              width: 210,
               child: Padding(
                 padding:
                     const EdgeInsets.only(top: CcSizes.sm, left: CcSizes.sm),

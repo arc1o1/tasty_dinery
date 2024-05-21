@@ -168,7 +168,7 @@ class CcProductCardHorizontal extends StatelessWidget {
                                   style:
                                       Theme.of(context).textTheme.titleSmall),
 
-                              const SizedBox(width: CcSizes.spaceBtnItems_1),
+                              const SizedBox(width: CcSizes.spaceBtnItems_2),
 
                               // add to cart icon
                               InkWell(

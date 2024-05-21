@@ -16,56 +16,58 @@ class ForgotPassword extends StatelessWidget {
     // saffold
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(CcSizes.defaultSpace),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // headings
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  CcTexts.forgotPasswordTitle,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: CcSizes.spaceBtnItems_1),
-                Text(
-                  CcTexts.forgotPasswordSubtitle,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(CcSizes.defaultSpace),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // headings
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    CcTexts.forgotPasswordTitle,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: CcSizes.spaceBtnItems_1),
+                  Text(
+                    CcTexts.forgotPasswordSubtitle,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
 
-            const SizedBox(height: CcSizes.spaceBtnSections * 2),
+              const SizedBox(height: CcSizes.spaceBtnSections * 2),
 
-            // textfield
-            Form(
-              key: controller.forgotPasswordFormKey,
-              child: TextFormField(
-                controller: controller.email,
-                validator: CcValidator.validateEmail,
-                decoration: const InputDecoration(
-                  labelText: CcTexts.email,
-                  prefixIcon: Icon(Icons.email_rounded),
+              // textfield
+              Form(
+                key: controller.forgotPasswordFormKey,
+                child: TextFormField(
+                  controller: controller.email,
+                  validator: CcValidator.validateEmail,
+                  decoration: const InputDecoration(
+                    labelText: CcTexts.email,
+                    prefixIcon: Icon(Icons.email_rounded),
+                  ),
                 ),
               ),
-            ),
 
-            const SizedBox(height: CcSizes.spaceBtnSections),
+              const SizedBox(height: CcSizes.spaceBtnSections),
 
-            // submit button
-            SizedBox(
-              width: double.infinity,
-              height: 60,
-              child: ElevatedButton(
-                onPressed: () => controller.sendPasswordResetEmail(),
-                child: const Text("Submit"),
+              // submit button
+              SizedBox(
+                width: double.infinity,
+                height: 60,
+                child: ElevatedButton(
+                  onPressed: () => controller.sendPasswordResetEmail(),
+                  child: const Text("Submit"),
+                ),
               ),
-            ),
 
-            const SizedBox(height: CcSizes.spaceBtnItems_1),
-          ],
+              const SizedBox(height: CcSizes.spaceBtnItems_1),
+            ],
+          ),
         ),
       ),
     );

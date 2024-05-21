@@ -8,8 +8,14 @@ class CcMealItems extends StatelessWidget {
     required this.productString,
     required this.quantity,
     required this.price,
+    this.productStringFontSize = 11,
+    this.quantityStringFontSize = 11,
+    this.priceStringFontSize = 12,
   });
   final String productString, quantity, price;
+  final double productStringFontSize,
+      quantityStringFontSize,
+      priceStringFontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +38,18 @@ class CcMealItems extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(fontSize: 11)),
+                    .copyWith(fontSize: productStringFontSize)),
             const SizedBox(width: 5),
             Text("x$quantity",
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(fontSize: 11)),
+                    .copyWith(fontSize: quantityStringFontSize)),
             const SizedBox(width: 15),
             Text("$price/=",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 12, fontWeight: FontWeight.bold)),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontSize: priceStringFontSize,
+                    fontWeight: FontWeight.bold)),
           ],
         ),
       ],

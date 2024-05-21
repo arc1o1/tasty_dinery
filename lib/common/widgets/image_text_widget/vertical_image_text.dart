@@ -31,7 +31,7 @@ class CcVerticalImageText extends StatelessWidget {
               image: image,
               width: 55,
               height: 55,
-              borderRadius: 10,
+              borderRadius: 100,
               sWidth: 55,
               sHeight: 55,
               sRadius: 10,

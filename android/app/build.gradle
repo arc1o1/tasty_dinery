@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.tasty_dinery"
-    compileSdkVersion 34 // flutter.compileSdkVersion
+    compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -65,4 +65,3 @@ flutter {
 }
 
 dependencies {}
-

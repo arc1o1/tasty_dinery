@@ -53,7 +53,7 @@ class SearchScreen extends StatelessWidget {
                     ? CcColors.dark
                     : Colors.grey.shade300,
                 expandedHeight:
-                    CcDeviceUtils.getScreenHeight() / 5.5, // the height
+                    CcDeviceUtils.getScreenHeight() / 5, // the height
 
                 // elements are inside a padding widget
                 flexibleSpace: Padding(

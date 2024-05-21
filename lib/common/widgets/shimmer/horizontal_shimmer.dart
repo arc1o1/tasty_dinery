@@ -26,13 +26,13 @@ class CcHorizontalProductShimmer extends StatelessWidget {
             Column(
               children: [
                 // text
-                CcShimmerEffect(width: 260, height: 20),
+                CcShimmerEffect(width: 200, height: 20),
                 SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
 
-                CcShimmerEffect(width: 260, height: 20),
+                CcShimmerEffect(width: 200, height: 20),
                 SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
 
-                CcShimmerEffect(width: 260, height: 20),
+                CcShimmerEffect(width: 200, height: 20),
               ],
             ),
           ],

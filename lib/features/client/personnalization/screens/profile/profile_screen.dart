@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // controller
-    final controller = UserController.instance;
+    final controller = UserController.instance; 
 
     // scaffold
     return Scaffold(
