@@ -31,7 +31,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-.dart_tool/
 
 # Symbolication related
 app.*.symbols
@@ -50,6 +49,7 @@ macos/
 windows/
 web/
 test/
+build/
 
 # large files
 *.apk
