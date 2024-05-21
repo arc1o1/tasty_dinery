@@ -29,17 +29,17 @@ Star⭐ the repo if you like what you see 😉.
 
 | 1 | 2| 3 | 4|
 |------|-------|------|-------|
-|<img src="assets/screenshots/04_home_one.jpg" width="150">|<img src="assets/screenshots/04_home_two.jpg" width="150">|<img src="assets/screenshots/05_popular.jpg" width="150">|<img src="assets/screenshots/06_search_one.jpg" width="150">|
+|<img src="assets/screenshots/04_home_one.jpg" width="200">|<img src="assets/screenshots/04_home_two.jpg" width="200">|<img src="assets/screenshots/05_popular.jpg" width="200">|<img src="assets/screenshots/06_search_one.jpg" width="200">|
 
 
 | 5 | 6| 7 | 8|
 |------|-------|------|-------|
-|<img src="assets/screenshots/09_product_detail_one.jpg" width="150">|<img src="assets/screenshots/09_product_detail_two.jpg" width="150">|<img src="assets/screenshots/07_settings.jpg" width="150">|<img src="assets/screenshots/08_profile.jpg" width="150">|
+|<img src="assets/screenshots/09_product_detail_one.jpg" width="200">|<img src="assets/screenshots/09_product_detail_two.jpg" width="200">|<img src="assets/screenshots/07_settings.jpg" width="200">|<img src="assets/screenshots/08_profile.jpg" width="200">|
 
 
 | 9 | 10| 11 | 12|
 |------|-------|------|-------|
-|<img src="assets/screenshots/10_checkout_one.jpg" width="150">|<img src="assets/screenshots/09_product_detail_two.jpg" width="150">|<img src="assets/screenshots/11_orders.jpg" width="150">|<img src="assets/screenshots/11_orders_detail.jpg" width="150">|
+|<img src="assets/screenshots/10_checkout_one.jpg" width="200">|<img src="assets/screenshots/09_product_detail_two.jpg" width="200">|<img src="assets/screenshots/11_orders.jpg" width="200">|<img src="assets/screenshots/11_orders_detail.jpg" width="200">|
 
 
 
@@ -48,7 +48,7 @@ Star⭐ the repo if you like what you see 😉.
 
 | 1 | 2| 3 | 4|
 |------|-------|------|-------|
-|<img src="assets/screenshots/00_admin_drawer.jpg" width="150">|<img src="assets/screenshots/01_admin_dashboard.jpg" width="150">|<img src="assets/screenshots/02_admin_product.jpg" width="150">|<img src="assets/screenshots/03_admin_categories.jpg" width="150">|
+|<img src="assets/screenshots/00_admin_drawer.jpg" width="200">|<img src="assets/screenshots/01_admin_dashboard.jpg" width="200">|<img src="assets/screenshots/02_admin_product.jpg" width="200">|<img src="assets/screenshots/03_admin_categories.jpg" width="200">|
 
 
 
