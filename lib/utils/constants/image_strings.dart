@@ -103,7 +103,7 @@ class CcImages {
   // success screen
   static const String successScreen =
       "assets/images/success_screen/sammy-line-online-payment.png";
-  static const String tick = "assets/images/success_screen/tick.png";
+  static const String tick = "assets/images/success_screen/Payment_success.png";
 
   // lottie animations
   static const String circularAnimation =

@@ -13,6 +13,7 @@ import 'package:tasty_dinery/features/client/shop/models/product_model.dart';
 import 'package:tasty_dinery/features/client/shop/screens/product_details/product_details_screen.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
+import 'package:tasty_dinery/utils/devices/device_utility.dart';
 
 class CcProductCardVertical extends StatelessWidget {
   const CcProductCardVertical({super.key, required this.product});
@@ -29,7 +30,7 @@ class CcProductCardVertical extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen(product: product)),
       child: Container(
-        width: 320,
+        // width: 320,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -56,7 +57,7 @@ class CcProductCardVertical extends StatelessWidget {
 
             // details
             SizedBox(
-              width: 210,
+              width: CcDeviceUtils.getScreenWidth(context) / 1.5,
               child: Padding(
                 padding:
                     const EdgeInsets.only(top: CcSizes.sm, left: CcSizes.sm),

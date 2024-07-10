@@ -41,11 +41,11 @@ class CcOrderListItems extends StatelessWidget {
           if (response != null) return response;
 
           // record found
-          final orders = snapshot.data!;
+          final orders = snapshot.data;
 
           return ListView.separated(
               shrinkWrap: true,
-              itemCount: orders.length,
+              itemCount: orders!.length,
               separatorBuilder: (_, index) => const SizedBox(height: 16),
               itemBuilder: (_, index) {
                 final order = orders[index];
@@ -127,7 +127,7 @@ class CcOrderListItems extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelMedium),
-                                      Text(order.id,
+                                      Text(order.orderID,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)

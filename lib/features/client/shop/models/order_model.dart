@@ -5,7 +5,8 @@ import 'package:tasty_dinery/utils/helpers/helper_functions.dart';
 
 class OrderModel {
   OrderModel({
-    required this.id,
+    this.id = "",
+    required this.orderID,
     this.userId = '',
     required this.status,
     required this.items,
@@ -16,7 +17,7 @@ class OrderModel {
     this.servedDate,
   });
 
-  final String id, userId;
+  final String id, userId, orderID;
   final OrderStatus status;
   final double totalAmount;
   final DateTime orderDate;
@@ -38,7 +39,7 @@ class OrderModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'orderID': orderID,
       'userId': userId,
       'status': status.toString(),
       'totalAmount': totalAmount,
@@ -54,21 +55,21 @@ class OrderModel {
     final data = snapshot.data() as Map<String, dynamic>;
 
     return OrderModel(
-      id: data['id'] as String,
-      userId: data['userId'] as String,
-      status: OrderStatus.values
-          .firstWhere((element) => element.toString() == data['status']),
-      totalAmount: data['totalAmount'] as double,
-      orderDate: (data['orderDate'] as Timestamp).toDate(),
-      paymentMethod: data['paymentMethod'] as String,
-      paymentNumber: data['paymentNumber'] as String,
-      servedDate: data['servedDate'] == null
-          ? null
-          : (data['servedDate'] as Timestamp).toDate(),
-      items: (data['items'] as List<dynamic>)
-          .map((itemData) =>
-              CartItemModel.fromJson(itemData as Map<String, dynamic>))
-          .toList(),
-    );
+        id: snapshot.id,
+        orderID: data['orderID'] as String,
+        userId: data['userId'] as String,
+        status: OrderStatus.values
+            .firstWhere((element) => element.toString() == data['status']),
+        totalAmount: data['totalAmount'] as double,
+        orderDate: (data['orderDate'] as Timestamp).toDate(),
+        paymentMethod: data['paymentMethod'] as String,
+        paymentNumber: data['paymentNumber'] as String,
+        servedDate: data['servedDate'] == null
+            ? null
+            : (data['servedDate'] as Timestamp).toDate(),
+        items: (data['items'] as List<dynamic>)
+            .map((itemData) =>
+                CartItemModel.fromJson(itemData as Map<String, dynamic>))
+            .toList());
   }
 }

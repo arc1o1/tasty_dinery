@@ -48,7 +48,7 @@ class OrderDetailsScreen extends StatelessWidget {
             // QR Code takes one argument from the database which is "order id"
             // inrease the height of the container for more clarification
             InkWell(
-              onTap: () => Get.to(() =>  FullScreenQRCode(data: qrcodeData)),
+              onTap: () => Get.to(() => FullScreenQRCode(data: qrcodeData)),
               child: Container(
                 padding: const EdgeInsets.only(bottom: 5),
                 color: Colors.transparent,
@@ -102,7 +102,7 @@ class OrderDetailsScreen extends StatelessWidget {
                           // 02
                           // order id
                           Text(
-                            order.id,
+                            order.orderID,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!

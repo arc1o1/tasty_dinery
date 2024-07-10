@@ -14,6 +14,8 @@ import 'package:tasty_dinery/utils/helpers/network_manager.dart';
 import 'package:tasty_dinery/utils/popups/full_screen_loader.dart';
 import 'package:tasty_dinery/utils/popups/loaders.dart';
 
+import '../screens/checkout/widget/payment_dialog_box.dart';
+
 class OrderController extends GetxController {
   static OrderController get instance => Get.find();
 
@@ -25,8 +27,10 @@ class OrderController extends GetxController {
 
   final userController = UserController.instance;
   final phoneNumber = TextEditingController();
+  final pin = TextEditingController();
 
   GlobalKey<FormState> phoneNoFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> pinNoFormKey = GlobalKey<FormState>();
 
   // fetch user's order history
   Future<List<OrderModel>> fetchUserOrders() async {
@@ -40,6 +44,37 @@ class OrderController extends GetxController {
   }
 
   // add methods for order processing
+  void openPaymentDialogue(double totalAmount) async {
+    try {
+      // start loader
+      // CcFullScreenLoader.openLoadingDialog(
+      //     'Processing your Order', CcImages.clockLoadingAnimation);
+
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        // CcFullScreenLoader.stopLoading();
+        return;
+      }
+
+      if (!phoneNoFormKey.currentState!.validate()) {
+        // CcFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // open a payment dialog box to enter one's pin
+      showDialog(
+        barrierDismissible: false,
+        context: Get.overlayContext!,
+        builder: (context) {
+          return PaymentDialogBox(totalAmount: totalAmount);
+        },
+      );
+
+    } catch (e) {
+      CcLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
   // add payment number param
   void processOrder(double totalAmount) async {
     try {
@@ -53,7 +88,7 @@ class OrderController extends GetxController {
         return;
       }
 
-      if (!phoneNoFormKey.currentState!.validate()) {
+      if (!pinNoFormKey.currentState!.validate()) {
         CcFullScreenLoader.stopLoading();
         return;
       }
@@ -64,7 +99,7 @@ class OrderController extends GetxController {
 
       // add details
       final order = OrderModel(
-        id: UniqueKey().toString(),
+        orderID: UniqueKey().toString(),
         userId: userId,
         status: OrderStatus.pending,
         totalAmount: totalAmount,
@@ -78,6 +113,8 @@ class OrderController extends GetxController {
       // save order to firestore
       await orderRepository.saveOrder(order, userId);
 
+      // reduce the amount from the whole product category
+
       // update cart status
       cartController.clearCart();
 
@@ -85,10 +122,11 @@ class OrderController extends GetxController {
       // have to find a payment gateway
 
       // show success screen
-      Get.off(() => SuccessOverlay(
+      Get.off(() =>
+          SuccessOverlay(
             title: 'Payment Sucess',
             subtitle:
-                'Your meal will be ready by the time you reach the cafeteria',
+            'Your meal will be ready by the time you reach the cafeteria',
             image: CcImages.tick,
             onPressed: () => Get.offAll(() => const OrderScreen()),
           ));

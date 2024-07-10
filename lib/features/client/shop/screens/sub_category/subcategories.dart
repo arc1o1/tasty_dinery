@@ -10,6 +10,11 @@ import 'package:tasty_dinery/features/client/shop/screens/all_products/all_produ
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 import 'package:tasty_dinery/utils/helpers/cloud_helper_functions.dart';
 
+import '../../../../../common/widgets/images/rounded_image.dart';
+import '../../../../../common/widgets/layout/grid_layout.dart';
+import '../../../../../common/widgets/products/product_cards/product_cards_vertical.dart';
+import '../../../../../utils/constants/image_strings.dart';
+
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key, required this.category});
 
@@ -35,87 +40,59 @@ class SubCategoriesScreen extends StatelessWidget {
             builder: (context, snapshot) {
               return Column(
                 children: [
-                  // // 1 - banner
-                  // const CcRoundedImage(
-                  //   width: double.infinity,
-                  //   imageUrl: CcImages.promoBanner3,
-                  //   applyImageRadius: true,
-                  // ),
+                  // 1 - banner
+                  const CcRoundedImage(
+                    width: double.infinity,
+                    imageUrl: CcImages.promoBanner3,
+                    applyImageRadius: true,
+                  ),
 
-                  // const SizedBox(height: CcSizes.spaceBtnItems_1),
+                  const SizedBox(height: CcSizes.spaceBtnItems_1),
 
                   // 2 - sub categories
+                  // products
                   FutureBuilder(
-                    future: controller.getSubCategories(category.id),
+                    future: controller.getCategoryProducts(
+                        categoryId: category.id),
                     builder: (context, snapshot) {
-                      // loader
-                      const loader = CcHorizontalProductShimmer();
-                      final widget =
-                          CcCloudHelperFunctions.checkMultiRecordState(
-                              snapshot: snapshot, loader: loader);
-                      if (widget != null) return widget;
+                      // helper function
+                      final response =
+                      CcCloudHelperFunctions.checkMultiRecordState(
+                          snapshot: snapshot,
+                          loader: const CcHorizontalProductShimmer());
+
+                      if (response != null) return response;
 
                       // record found
-                      final subCategories = snapshot.data!;
+                      final products = snapshot.data!;
 
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: subCategories.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (_, index) {
-                          final subCategory = subCategories[index];
+                      // column
+                      return Column(
+                        children: [
+                          CcSectionHeading(
+                            title: 'You might like',
+                            showActionButton: true,
+                            onPressed: () => Get.to(
+                              AllProducts(
+                                title: category.name,
+                                futureMethod: controller.getCategoryProducts(
+                                    categoryId: category.id, limit: -1),
+                              ),
+                            ),
+                          ),
 
-                          return FutureBuilder(
-                              future: controller.getCategoryProducts(
-                                  categoryId: subCategory.id),
-                              builder: (context, snapshot) {
-                                // loader
-                                final widget = CcCloudHelperFunctions
-                                    .checkMultiRecordState(
-                                        snapshot: snapshot, loader: loader);
-                                if (widget != null) return widget;
+                          const SizedBox(height: CcSizes.spaceBtnItems_1 / 2),
 
-                                // record found
-                                final products = snapshot.data!;
+                          // grid fort product cards
+                          CcGridLayout(
+                            itemCount: products.length,
+                            itemBuilder: (_, index) => CcProductCardVertical(
+                              product: products[index],
+                            ),
+                          ),
 
-                                return Column(
-                                  children: [
-                                    // heading
-                                    CcSectionHeading(
-                                      title: subCategory.name,
-                                      onPressed: () => Get.to(() => AllProducts(
-                                            title: subCategory.name,
-                                            futureMethod:
-                                                controller.getCategoryProducts(
-                                                    categoryId: subCategory.id,
-                                                    limit: -1),
-                                          )),
-                                    ),
-
-                                    const SizedBox(
-                                        height: CcSizes.spaceBtnItems_2),
-
-                                    // listview
-                                    SizedBox(
-                                      height: 125,
-                                      child: ListView.separated(
-                                          itemCount: products.length,
-                                          scrollDirection: Axis.horizontal,
-                                          separatorBuilder: (content, index) =>
-                                              const SizedBox(
-                                                  width:
-                                                      CcSizes.spaceBtnItems_1),
-                                          itemBuilder: (context, index) =>
-                                              CcProductCardHorizontal(
-                                                  product: products[index])),
-                                    ),
-
-                                    const SizedBox(
-                                        height: CcSizes.spaceBtnItems_1),
-                                  ],
-                                );
-                              });
-                        },
+                          const SizedBox(height: CcSizes.spaceBtnItems_2),
+                        ],
                       );
                     },
                   ),

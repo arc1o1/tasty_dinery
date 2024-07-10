@@ -1,25 +1,23 @@
 name: tasty_dinery
 description: "A new Flutter project."
 
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: '>=3.2.5 <4.0.0'
 
 # packages
-
 dependencies:
   flutter:
     sdk: flutter
 
   # utility packages
-
   smooth_page_indicator: ^1.1.0
   http: ^0.13.5
   url_launcher: ^6.2.5
   connectivity_plus: ^5.0.2
-  intl: ^0.18.0
+  intl: ^0.19.0
   logger: ^2.1.0
   lottie: ^3.0.0
   circular_profile_avatar: ^2.0.5
@@ -34,7 +32,6 @@ dependencies:
   scrollable_table_view: ^2.0.3
 
   # icons
-
   cupertino_icons: ^1.0.2
   iconsax: ^0.0.8
   font_awesome_flutter: ^10.7.0
@@ -42,13 +39,11 @@ dependencies:
   flutter_spinkit: ^5.2.0
 
   # state management
-
   get: ^4.6.5
   get_storage: ^2.1.1
   shared_preferences: ^2.2.2
 
   # product specific
-
   readmore: ^2.2.0
   carousel_slider: ^4.2.1
   flutter_rating_bar: ^4.0.1
@@ -56,53 +51,57 @@ dependencies:
   qr_flutter: ^4.1.0
   qr_image: ^1.0.0
 
-  # firebase 
+  # firebase
   firebase_core: ^2.27.0
   cloud_firestore: ^4.14.0
   firebase_auth: ^4.17.8
   google_sign_in: ^6.2.1
   firebase_storage: ^11.5.4
   cached_network_image: ^3.3.1
-  azampay: ^0.0.1
-  # pay: ^2.0.0
+
+  # payment method
+  pay: ^1.1.2
 
 
-# // Flutter Fix ─────────────────────────────────────────────────────────────────────────────────┐
-# // │ The plugin pay_android requires a higher Android SDK version.                                 │
-# // │ Fix this issue by adding the following to the file /home/techsphere/Documents/fourth          │
-# // │ year/fyp/project/tasty_dinery/android/app/build.gradle:                                       │
-# // │ android {                                                                                     │
-# // │   defaultConfig {                                                                             │
-# // │     minSdkVersion 21                                                                          │
-# // │   }                                                                                           │
-# // │ }                                                                                             │
-# // │                                                                                               │
-# // │ Following this change, your app will not be available to users running Android SDKs below 21. │
-# // │ Consider searching for a version of this plugin that supports these lower versions of the     │
-# // │ Android SDK instead.                                                                          │
-# // │ For more information, see:                                                                    │
-# // │ https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration          │
-# // └───────────────────────────────────────────────────────────────────────────────────────────────┘
-  
-
+  # // Flutter Fix ─────────────────────────────────────────────────────────────────────────────────┐
+  # // │ The plugin pay_android requires a higher Android SDK version.                                 │
+  # // │ Fix this issue by adding the following to the file /home/techsphere/Documents/fourth          │
+  # // │ year/fyp/project/tasty_dinery/android/app/build.gradle:                                       │
+  # // │ android {                                                                                     │
+  # // │   defaultConfig {                                                                             │
+  # // │     minSdkVersion 21                                                                          │
+  # // │   }                                                                                           │
+  # // │ }                                                                                             │
+  # // │                                                                                               │
+  # // │ Following this change, your app will not be available to users running Android SDKs below 21. │
+  # // │ Consider searching for a version of this plugin that supports these lower versions of the     │
+  # // │ Android SDK instead.                                                                          │
+  # // │ For more information, see:                                                                    │
+  # // │ https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration          │
+  # // └───────────────────────────────────────────────────────────────────────────────────────────────┘
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^4.0.0
 
+  # flutter icons
+  flutter_launcher_icons: ^0.13.1
 
-
-  flutter_lints: ^3.0.1
-
+# launcher icon detail
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: "AppIcon"
+  image_path: "assets/logos/android/mipmap-xxxhdpi/ic_launcher_foreground.png" # "assets/logos/android/ic_launcher-web.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21 #059B44
+  remove_alpha_ios: true
 
 flutter:
-
-
   uses-material-design: true
 
   # local assets
-
   assets:
+    - assets/
     - assets/logos/
     - assets/images/onboarding_images/
     - assets/images/auth_images/
@@ -116,7 +115,6 @@ flutter:
     - assets/lottie_animations/
 
   # fonts
-  
   fonts:
     - family: NeutriffPro
       fonts:
@@ -149,7 +147,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/nunito/Nunito-Bold.ttf
           weight: 800
- 
+
     - family: OpenSans
       fonts:
         - asset: assets/fonts/open-sans/OpenSans-Light.ttf
@@ -165,7 +163,7 @@ flutter:
           weight: 800
         - asset: assets/fonts/open-sans/OpenSans-SemiboldItalic.ttf
           style: italic
- 
+
     - family: PlayfairDisplay
       fonts:
         - asset: assets/fonts/playfair-display/PlayfairDisplay-Bold.ttf

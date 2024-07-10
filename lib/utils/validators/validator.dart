@@ -11,6 +11,12 @@ class CcValidator {
     return null;
   }
 
+  static String? validatePin(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'pin is required';
+    }
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'email is required';
@@ -68,6 +74,7 @@ class CcValidator {
 
     return null;
   }
+
   // more custom validators
 
   // only checkout phone number validator

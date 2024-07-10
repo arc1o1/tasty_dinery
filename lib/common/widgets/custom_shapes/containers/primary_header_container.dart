@@ -22,7 +22,7 @@ class CcPrimaryHeaderContainer extends StatelessWidget {
         color: Colors.blue.shade700,
         padding: const EdgeInsets.all(0),
         child: SizedBox(
-          height: CcDeviceUtils.getScreenHeight() * .34,
+          height: CcDeviceUtils.getScreenHeight() * .27,
           child: Stack(
             children: [
               Positioned(

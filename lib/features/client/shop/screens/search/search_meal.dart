@@ -72,7 +72,7 @@ class SearchScreen extends StatelessWidget {
                           showBackground: false,
                           padding: EdgeInsets.zero),
 
-                      SizedBox(height: CcSizes.spaceBtnItems_2),
+                      // SizedBox(height: CcSizes.spaceBtnItems_2),
 
                       // featured brands
                       // CcSectionHeading(

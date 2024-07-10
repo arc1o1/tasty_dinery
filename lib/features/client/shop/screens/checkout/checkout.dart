@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pay/pay.dart';
 import 'package:tasty_dinery/common/widgets/appbar/appbar.dart';
 import 'package:tasty_dinery/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:tasty_dinery/common/widgets/products/cart/coupon_widget.dart';
@@ -9,6 +10,7 @@ import 'package:tasty_dinery/features/client/shop/controllers/product_order_cont
 import 'package:tasty_dinery/features/client/shop/screens/cart/widgets/cart_items.dart';
 import 'package:tasty_dinery/features/client/shop/screens/checkout/widget/billing_payment_method_section.dart';
 import 'package:tasty_dinery/features/client/shop/screens/checkout/widget/billing_amount_section.dart';
+import 'package:tasty_dinery/features/client/shop/screens/checkout/widget/payment_dialog_box.dart';
 import 'package:tasty_dinery/utils/constants/colors.dart';
 import 'package:tasty_dinery/utils/constants/sizes.dart';
 import 'package:tasty_dinery/utils/helpers/pricing_calculator.dart';
@@ -28,6 +30,14 @@ class CheckoutScreen extends StatelessWidget {
 
     final orderController = Get.put(OrderController());
     final totalAmount = CcPricingCalculator.calculateTotalPrice(subTotal, 'Tz');
+
+    const _paymentItems = [
+      PaymentItem(
+        label: 'Total',
+        amount: '99.99',
+        status: PaymentItemStatus.final_price,
+      )
+    ];
 
     // scaffold
     return Scaffold(
@@ -74,7 +84,7 @@ class CheckoutScreen extends StatelessWidget {
                     CcBillingPaymentMethodSection(),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -85,7 +95,7 @@ class CheckoutScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: ElevatedButton(
             onPressed: subTotal > 0
-                ? () => orderController.processOrder(totalAmount)
+                ? () => orderController.openPaymentDialogue(totalAmount)
                 : () => CcLoaders.warningSnackBar(
                     title: 'Empty Cart',
                     message: 'Add Items to cart to proceed.'),
